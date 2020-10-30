@@ -9,6 +9,8 @@ git_api.gdns
 # Idea-specific ignores
 .idea/
 
+packages-microsoft-prod.deb
+
 # Mono-specific ignores
 .mono/
 data_*/

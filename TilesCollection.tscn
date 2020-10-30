@@ -1,0 +1,132 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://src/Tile/TileType/CampTile.cs" type="Script" id=1]
+[ext_resource path="res://src/Tile/TileType/PyramidTile.cs" type="Script" id=2]
+[ext_resource path="res://src/Tile/TileType/CityTile.cs" type="Script" id=3]
+[ext_resource path="res://src/Tile/TileType/RoadTile.cs" type="Script" id=4]
+[ext_resource path="res://src/Tile/TileType/TempleTile.cs" type="Script" id=5]
+[ext_resource path="res://Tile.tscn" type="PackedScene" id=6]
+[ext_resource path="res://src/Tile/TileType/SacredTile.cs" type="Script" id=7]
+[ext_resource path="res://src/Tile/TileType/BattlegroundTile.cs" type="Script" id=8]
+
+[node name="TilesCollection" type="Node2D"]
+
+[node name="WhiteTemple" parent="." instance=ExtResource( 6 )]
+position = Vector2( 800, 190 )
+
+[node name="Type" type="Node2D" parent="WhiteTemple"]
+script = ExtResource( 5 )
+
+[node name="WhiteCamp" parent="." instance=ExtResource( 6 )]
+position = Vector2( 690, 190 )
+
+[node name="Type" type="Node2D" parent="WhiteCamp"]
+script = ExtResource( 1 )
+
+[node name="WhiteRoad" parent="." instance=ExtResource( 6 )]
+position = Vector2( 580, 190 )
+
+[node name="Type" type="Node2D" parent="WhiteRoad"]
+script = ExtResource( 4 )
+
+[node name="WhiteStart" parent="." instance=ExtResource( 6 )]
+position = Vector2( 470, 190 )
+
+[node name="Type" type="Node2D" parent="WhiteStart"]
+script = ExtResource( 1 )
+
+[node name="BlackTemple" parent="." instance=ExtResource( 6 )]
+position = Vector2( 800, 410 )
+
+[node name="Type" type="Node2D" parent="BlackTemple"]
+script = ExtResource( 5 )
+
+[node name="BlackCamp" parent="." instance=ExtResource( 6 )]
+position = Vector2( 690, 410 )
+
+[node name="Type" type="Node2D" parent="BlackCamp"]
+script = ExtResource( 1 )
+
+[node name="BlackRoad" parent="." instance=ExtResource( 6 )]
+position = Vector2( 580, 410 )
+
+[node name="Type" type="Node2D" parent="BlackRoad"]
+script = ExtResource( 4 )
+
+[node name="BlackStart" parent="." instance=ExtResource( 6 )]
+position = Vector2( 470, 410 )
+
+[node name="Type" type="Node2D" parent="BlackStart"]
+script = ExtResource( 1 )
+
+[node name="Finish" parent="." instance=ExtResource( 6 )]
+position = Vector2( 800, 300 )
+
+[node name="Type" type="Node2D" parent="Finish"]
+script = ExtResource( 7 )
+
+[node name="MainRoad" parent="." instance=ExtResource( 6 )]
+position = Vector2( 690, 300 )
+
+[node name="Type" type="Node2D" parent="MainRoad"]
+script = ExtResource( 4 )
+
+[node name="Uruk" parent="." instance=ExtResource( 6 )]
+position = Vector2( 580, 300 )
+
+[node name="Type" type="Node2D" parent="Uruk"]
+script = ExtResource( 3 )
+
+[node name="MainTemple" parent="." instance=ExtResource( 6 )]
+position = Vector2( 470, 300 )
+
+[node name="Type" type="Node2D" parent="MainTemple"]
+script = ExtResource( 5 )
+
+[node name="BridgeRoad" parent="." instance=ExtResource( 6 )]
+position = Vector2( 360, 300 )
+
+[node name="Type" type="Node2D" parent="BridgeRoad"]
+script = ExtResource( 4 )
+
+[node name="BridgeCity" parent="." instance=ExtResource( 6 )]
+position = Vector2( 250, 300 )
+
+[node name="Type" type="Node2D" parent="BridgeCity"]
+script = ExtResource( 3 )
+
+[node name="BridgeCamp" parent="." instance=ExtResource( 6 )]
+position = Vector2( 140, 300 )
+
+[node name="Type" type="Node2D" parent="BridgeCamp"]
+script = ExtResource( 1 )
+
+[node name="Battleground" parent="." instance=ExtResource( 6 )]
+position = Vector2( 30, 300 )
+
+[node name="Type" type="Node2D" parent="Battleground"]
+script = ExtResource( 8 )
+
+[node name="WhiteTemple2" parent="." instance=ExtResource( 6 )]
+position = Vector2( 140, 190 )
+
+[node name="Type" type="Node2D" parent="WhiteTemple2"]
+script = ExtResource( 5 )
+
+[node name="WhitePyramid" parent="." instance=ExtResource( 6 )]
+position = Vector2( 30, 190 )
+
+[node name="Type" type="Node2D" parent="WhitePyramid"]
+script = ExtResource( 2 )
+
+[node name="BlackTemple2" parent="." instance=ExtResource( 6 )]
+position = Vector2( 140, 410 )
+
+[node name="Type" type="Node2D" parent="BlackTemple2"]
+script = ExtResource( 5 )
+
+[node name="BlackPyramid" parent="." instance=ExtResource( 6 )]
+position = Vector2( 30, 410 )
+
+[node name="Type" type="Node2D" parent="BlackPyramid"]
+script = ExtResource( 2 )

@@ -1,0 +1,20 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://src/Tile/Tile.cs" type="Script" id=1]
+
+[node name="Tile" type="Node2D"]
+position = Vector2( -5, -4 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="TileButton" type="Button" parent="."]
+margin_left = -50.0
+margin_top = -50.0
+margin_right = 50.0
+margin_bottom = 50.0
+expand_icon = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
