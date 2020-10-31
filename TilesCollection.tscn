@@ -130,3 +130,9 @@ position = Vector2( 30, 410 )
 
 [node name="Type" type="Node2D" parent="BlackPyramid"]
 script = ExtResource( 2 )
+
+[node name="Release" parent="." instance=ExtResource( 6 )]
+position = Vector2( 910, 300 )
+
+[node name="Type" type="Node2D" parent="Release"]
+script = ExtResource( 4 )

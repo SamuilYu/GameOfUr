@@ -11,8 +11,7 @@ public class Player : Node2D
 
     public override void _Ready()
     {
-        var path = new PlayerPath(Team);
-        AddChild(path);
+        return;
     }
 
 }
