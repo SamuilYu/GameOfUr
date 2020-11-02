@@ -16,7 +16,7 @@ namespace royalgameofur
 
         public PlayerTeam Team;
         internal SoldierTenure Tenure;
-        private Button Button;
+        public Button Button;
         internal Tile CurrentTile;
         public bool blocked;
         private Vector2 Speed;

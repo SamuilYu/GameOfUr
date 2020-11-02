@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://src/Tile/Tile.cs" type="Script" id=1]
 [ext_resource path="res://TilePopupMenu.tscn" type="PackedScene" id=2]
+[ext_resource path="res://TileDetails.tscn" type="PackedScene" id=3]
+[ext_resource path="res://TileButton.cs" type="Script" id=4]
 
 [node name="Tile" type="Node2D"]
 position = Vector2( -5, -4 )
@@ -37,7 +39,7 @@ __meta__ = {
 }
 
 [node name="TileButtonWrapper" type="CanvasLayer" parent="."]
-layer = 2
+layer = -1
 
 [node name="TileButton" type="Button" parent="TileButtonWrapper"]
 modulate = Color( 1, 1, 1, 0.0705882 )
@@ -53,8 +55,33 @@ focus_mode = 0
 mouse_filter = 2
 enabled_focus_mode = 0
 expand_icon = true
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DetailsButton" type="Button" parent="TileButtonWrapper"]
+visible = false
+modulate = Color( 1, 1, 1, 0.0705882 )
+anchor_left = -0.005
+anchor_top = -0.007
+anchor_right = -0.005
+anchor_bottom = -0.007
+margin_left = -50.4359
+margin_top = -49.7685
+margin_right = 49.5641
+margin_bottom = 50.2315
+focus_mode = 0
+mouse_filter = 1
+button_mask = 3
+enabled_focus_mode = 0
+expand_icon = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="TilePopupMenuWrapper" parent="." instance=ExtResource( 2 )]
+
+[node name="TileDetailsPopup" parent="." instance=ExtResource( 3 )]
+[connection signal="gui_input" from="TileButtonWrapper/TileButton" to="." method="OnTileButtonInput"]
+[connection signal="pressed" from="TileButtonWrapper/DetailsButton" to="." method="OnDetailsButtonPressed"]

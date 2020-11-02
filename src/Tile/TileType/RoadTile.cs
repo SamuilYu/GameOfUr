@@ -9,6 +9,9 @@ namespace royalgameofur
             base._Ready();
             Texture = GD.Load("res://textures/tiles/RoadTile.png") as Texture;
             MaxCapacity = 1;
+            Description =
+                "You can have a rest by the side of this road, but this place can not house more than one unit. " +
+                "And stay on your guard, an enemy can attack from behind";
         }
 
         public override void Receive(Soldier soldier)

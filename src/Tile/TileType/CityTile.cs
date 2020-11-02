@@ -10,6 +10,10 @@ namespace royalgameofur
             base._Ready();
             Texture = GD.Load("res://textures/tiles/CityTile.png") as Texture;
             MaxCapacity = 4;
+            Description = "You can rest here! Great cities of Mesopotamia are peaceful places of commerce " +
+                          "and no one will risk destroying this peace. " +
+                          "But heed this warning: if you rest too long, newcomers will gain control of all the exits " +
+                          "and block you in this city.";
         }
 
         public override bool CanReceiveSoldier(Soldier soldier)

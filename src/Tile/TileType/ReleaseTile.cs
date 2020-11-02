@@ -6,6 +6,9 @@ namespace royalgameofur
         {
             FilledCapacity = 0;
             MaxCapacity = 1;
+            Description =
+                "This is the end of the journey. When you reach it, your brothers-at-arms " +
+                "will salute your heroism and dream of reaching this place as well.";
         }
 
         public override void Receive(Soldier soldier)

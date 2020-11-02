@@ -9,6 +9,9 @@ namespace royalgameofur
             base._Ready();
             Texture = GD.Load("res://textures/tiles/SacredTile.png") as Texture;
             MaxCapacity = 1;
+            Description = "For a novice this is a place just like any other. " +
+                          "But veterans who have come this far and rest assured - they are safe. " +
+                          "Their skill is recognized and respected through out the land";
         }
 
         public override bool CanReceiveSoldier(Soldier soldier)
@@ -21,6 +24,7 @@ namespace royalgameofur
         {
             MayBeAttack(soldier);
             base.Receive(soldier);
-            soldier.EndTurn();        }
+            soldier.EndTurn();        
+        }
     }
 }

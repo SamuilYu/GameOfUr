@@ -11,6 +11,8 @@ namespace royalgameofur
         public bool reached = false;
         private bool waitingForSoldier = false;
         private Button tileLight;
+        public PanelContainer TileDetails;
+        private bool canSelect;
 
         public override void _Ready()
         {
@@ -18,15 +20,53 @@ namespace royalgameofur
             button = GetNode("TileButtonWrapper").GetNode<Button>("TileButton");
             tileLight = GetNode<Button>("TileLightButton");
             potentialSoldier = null;
+            TileDetails = GetNode("TileDetailsPopup").GetNode<PanelContainer>("TileDetails");
+            canSelect = false;
 
             if (button == null) return;
-            button.Connect("pressed", this, "_On_Pressed");
+            // button.Connect("pressed", this, "_On_Pressed");
             GetNode<Button>("IconButton").Icon = strategy.Texture;
-            button.MouseFilter = Control.MouseFilterEnum.Ignore;
+            button.ButtonMask = 3;
             button.Flat = true;
             button.RectGlobalPosition = tileLight.RectGlobalPosition;
+            GetNode("TileButtonWrapper").GetNode<Button>("DetailsButton").RectGlobalPosition = button.RectGlobalPosition;
             tileLight.MouseFilter = Control.MouseFilterEnum.Ignore;
             tileLight.Flat = true;
+
+            TileDetails.GetNode<HBoxContainer>("DetailsContainer").GetNode<Label>("TypeDescription").Text =
+                strategy.Description;
+            TileDetails.RectGlobalPosition = new Vector2(275, 365);
+            TileDetails.GetParent<Popup>().Hide();
+        }
+
+        private void OnTileButtonInput(InputEvent inputEvent)
+        {
+            if (inputEvent is InputEventMouseButton currentEvent && currentEvent.IsPressed())
+            {
+                switch (currentEvent.ButtonIndex)
+                {
+                    case (int)ButtonList.Left:
+                        if (canSelect) _On_Pressed();
+                        break;
+                    case (int)ButtonList.Right:
+                        OnDetailsPopupPressed();
+                        break;
+                    default: break;
+                }
+            }
+        }
+
+        private void OnDetailsPopupPressed()
+        {
+            foreach (var child in GetParent().GetChildren())
+            {
+                if (child is Tile tile && tile != this)
+                {
+                    tile.GetNode<Popup>("TileDetailsPopup").Hide();
+                }
+                
+            }
+            TileDetails.GetParent<Popup>().Popup_();
         }
 
         public void _On_Pressed()
@@ -61,7 +101,8 @@ namespace royalgameofur
             bool check = strategy.CanReceiveSoldier(soldier);
             if (toggle)
             {
-                button.MouseFilter =  check? Control.MouseFilterEnum.Stop : Control.MouseFilterEnum.Ignore;
+                canSelect = check;
+                // button.ButtonMask |= check? (int) ButtonList.MaskLeft : 0;
                 tileLight.Flat = false;
                 tileLight.Modulate = 
                     check? 
@@ -75,7 +116,8 @@ namespace royalgameofur
         public void Unselect()
         {
             potentialSoldier = null;
-            button.MouseFilter = Control.MouseFilterEnum.Ignore;
+            canSelect = false;
+            // button.ButtonMask = (int) ButtonList.MaskRight;
             tileLight.Flat = true;
         }
 

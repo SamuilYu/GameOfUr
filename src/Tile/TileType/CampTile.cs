@@ -12,6 +12,9 @@ namespace royalgameofur
             Texture = GD.Load("res://textures/tiles/CampTile.png") as Texture;
             MaxCapacity = 4;
             CurrentTeam = PlayerTeam.None;
+            Description = "This is an army camp. Army camps can house up to four units at once." +
+                          " Once an army captures a camp, a soldier of an opposing army can not step into this territory until " +
+                          "the last soldier leaves.";
         }
 
         public override bool CanReceiveSoldier(Soldier soldier)

@@ -18,6 +18,8 @@ margin_right = 45.0
 margin_bottom = 45.0
 grow_horizontal = 2
 grow_vertical = 0
+focus_mode = 0
+enabled_focus_mode = 0
 __meta__ = {
 "_edit_use_anchors_": false
 }
