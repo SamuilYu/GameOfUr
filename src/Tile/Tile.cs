@@ -5,44 +5,78 @@ namespace royalgameofur
 {
     public class Tile: Node2D
     {
-        private TileStrategy strategy;
+        public TileStrategy strategy { get; private set; }
         private Button button;
         private Soldier potentialSoldier;
         public bool reached = false;
         private bool waitingForSoldier = false;
+        private Button tileLight;
 
         public override void _Ready()
         {
             strategy = GetNode("Type") as TileStrategy;
-            button = GetNode("TileButton") as Button;
+            button = GetNode("TileButtonWrapper").GetNode<Button>("TileButton");
+            tileLight = GetNode<Button>("TileLightButton");
             potentialSoldier = null;
 
             if (button == null) return;
             button.Connect("pressed", this, "_On_Pressed");
-            button.Icon = strategy.Texture;
+            GetNode<Button>("IconButton").Icon = strategy.Texture;
             button.MouseFilter = Control.MouseFilterEnum.Ignore;
             button.Flat = true;
+            button.RectGlobalPosition = tileLight.RectGlobalPosition;
+            tileLight.MouseFilter = Control.MouseFilterEnum.Ignore;
+            tileLight.Flat = true;
         }
 
         public void _On_Pressed()
         {
-            if (potentialSoldier.March != null) potentialSoldier.MarchOn();
-            waitingForSoldier = true;
+            var currentTurn = GetParent<Node2D>().GetParent<Node2D>().GetParent<Node2D>().GetNode<Dice>("3D2 Dice").currentTurn;
+            if (strategy.HasSoldiers(currentTurn))
+            {
+                var popupMenu = GetNode("TilePopupMenuWrapper").GetNode<PopupMenu>("PopupMenu");
+                popupMenu.Popup_();
+                popupMenu.SetGlobalPosition(GetGlobalMousePosition());
+                return;
+            }
+            MakeSoldierMarch();
         }
 
-        public void CheckPlaceForSoldier(Soldier soldier)
+        private void SelectTopSoldier()
+        {
+            strategy.TopSoldier()?.Select();
+        }
+
+        private void MakeSoldierMarch()
+        {
+            if (potentialSoldier.March != null)
+            {
+                waitingForSoldier = true;
+                potentialSoldier.MarchOn();
+            }
+        }
+
+        public bool CheckPlaceForSoldier(Soldier soldier, bool toggle=true)
         {
             bool check = strategy.CanReceiveSoldier(soldier);
-            button.MouseFilter =  check? Control.MouseFilterEnum.Pass : Control.MouseFilterEnum.Ignore;
-            button.Flat = !check;
-            potentialSoldier = check ? soldier : null;
+            if (toggle)
+            {
+                button.MouseFilter =  check? Control.MouseFilterEnum.Stop : Control.MouseFilterEnum.Ignore;
+                tileLight.Flat = false;
+                tileLight.Modulate = 
+                    check? 
+                        new Color((float) 0.44, (float) 2.0, (float) 0.03, (float) 0.25) 
+                        : new Color((float) 0.93, (float) 0.29, (float) 0.04, (float) 0.4);
+                potentialSoldier = check ? soldier : null;
+            }
+            return check;
         }
 
         public void Unselect()
         {
             potentialSoldier = null;
             button.MouseFilter = Control.MouseFilterEnum.Ignore;
-            button.Flat = true;
+            tileLight.Flat = true;
         }
 
         public override void _Process(float delta)

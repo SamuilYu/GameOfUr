@@ -1,17 +1,24 @@
 using Godot;
-using System;
 using royalgameofur;
 
 public class Player : Node2D
 
 
 {
-    [Export()]
-    public PlayerTeam Team { get; private set; }
+    [Signal]
+    public delegate void EndTurn();
 
-    public override void _Ready()
+    public void EndThisTurn()
     {
-        return;
+        foreach (var child in GetParent().GetChildren())
+        {
+            if (child is Player player && player != this) player.NewTurn();
+        }
+        EmitSignal("EndTurn");
     }
 
+    private void NewTurn()
+    {
+        GD.Print("My turn!");
+    }
 }

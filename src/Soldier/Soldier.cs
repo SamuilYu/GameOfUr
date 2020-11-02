@@ -21,7 +21,7 @@ namespace royalgameofur
         public bool blocked;
         private Vector2 Speed;
         private bool CanMove;
-        private int PreviousZIndex;
+        public int PreviousZIndex = 1;
 
         public Soldier()
         {
@@ -37,18 +37,20 @@ namespace royalgameofur
             CanMove = false;
             Button = GetNode<Button>("SoldierButton");
             Button.Connect("pressed", this, "Select");
+            Button.Flat = true;
+            Button.MouseFilter = Control.MouseFilterEnum.Ignore;
             Connect(nameof(SoldierPressed), GetParent<Squad>(), "_On_SoldierPressed");
             Tenure = SoldierTenure.Private;
             Team = GetParent<Squad>().Team;
             SetIcon();
-            ReturnToBase();
+            Retreat();
             Sleep();
         }
 
-        private void ReturnToBase()
+        public void ChangeTenure(SoldierTenure newTenure)
         {
-            GetParent<Squad>().GetNode<SquadBase>("SquadBase").Receive(this);
-            CurrentTile = null;
+            this.Tenure = newTenure;
+            SetIcon();
         }
 
         public void Wake()
@@ -58,7 +60,7 @@ namespace royalgameofur
 
         public void Sleep()
         {
-            Button.MouseFilter =Control.MouseFilterEnum.Ignore;
+            Button.MouseFilter = Control.MouseFilterEnum.Ignore;
         }
 
         public void Select()
@@ -71,7 +73,7 @@ namespace royalgameofur
         public void Unselect()
         {
             ZIndex = PreviousZIndex;
-            March[March.Count - 1].Key.Unselect();
+            if (March?.Count != 0) March?[March.Count - 1].Key.Unselect();
         }
 
         private void SetIcon()
@@ -92,6 +94,7 @@ namespace royalgameofur
                     }
                     break;
                 case SoldierTenure.Veteran:
+                case SoldierTenure.Switch:
                     switch (Team)
                     {
                         case PlayerTeam.White:
@@ -107,6 +110,12 @@ namespace royalgameofur
                 default:
                     throw new ArgumentOutOfRangeException();
             }
+        }
+
+        public void Retreat()
+        {
+            CurrentTile?.GetNode<TileStrategy>("Type").Discharge(this);
+            GetParent().GetNode<SquadBase>("SquadBase").Receive(this);
         }
 
         public void MarchOn()
@@ -134,6 +143,7 @@ namespace royalgameofur
                 {
                     CanMove = false;
                     March[0].Key.reached = true;
+                    ChangeTenure(March[0].Value);
                 }
                 March.RemoveAt(0);
                 if (March.Count != 0) Speed = (March[0].Key.GlobalPosition - this.GlobalPosition).Normalized() * 200;
@@ -141,6 +151,11 @@ namespace royalgameofur
             }
 
             if (CanMove) MoveAndSlide(Speed);
+        }
+
+        public void EndTurn()
+        {
+            GetParent<Squad>().EndTurn();
         }
     }
 }

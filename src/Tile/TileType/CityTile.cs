@@ -16,5 +16,18 @@ namespace royalgameofur
         {
             return FilledCapacity < MaxCapacity;
         }
+        
+        public override void Receive(Soldier soldier)
+        {
+            if (FilledCapacity != 0) stationedSoldiers[stationedSoldiers.Count - 1].blocked = true;
+            base.Receive(soldier);
+            soldier.EndTurn();
+        }
+
+        public override void Discharge(Soldier soldier)
+        {
+            base.Discharge(soldier);
+            if (FilledCapacity != 0) stationedSoldiers[FilledCapacity - 1].blocked = false;
+        }
     }
 }

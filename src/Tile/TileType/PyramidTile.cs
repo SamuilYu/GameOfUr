@@ -10,5 +10,13 @@ namespace royalgameofur
             Texture = GD.Load("res://textures/tiles/PyramidTile.png") as Texture;
             MaxCapacity = 1;
         }
+
+        public override void Receive(Soldier soldier)
+        {
+            MayBeAttack(soldier);
+            base.Receive(soldier);
+            soldier.EndTurn();
+        }
+
     }
 }

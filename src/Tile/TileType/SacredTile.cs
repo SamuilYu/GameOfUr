@@ -13,8 +13,14 @@ namespace royalgameofur
 
         public override bool CanReceiveSoldier(Soldier soldier)
         {
-            if (FilledCapacity == MaxCapacity && stationedSoldiers[FilledCapacity].Tenure == SoldierTenure.Veteran) return false;
+            if (FilledCapacity == MaxCapacity && stationedSoldiers[FilledCapacity - 1].Tenure == SoldierTenure.Veteran) return false;
             return base.CanReceiveSoldier(soldier);
         }
+
+        public override void Receive(Soldier soldier)
+        {
+            MayBeAttack(soldier);
+            base.Receive(soldier);
+            soldier.EndTurn();        }
     }
 }

@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using Godot;
 
 namespace royalgameofur
@@ -33,7 +35,8 @@ namespace royalgameofur
 		public virtual bool CanReceiveSoldier(Soldier soldier)
 		{
 			if (FilledCapacity < MaxCapacity) return true;
-			return stationedSoldiers[FilledCapacity].Team != soldier.Team;
+			return stationedSoldiers[FilledCapacity - 1].Team != soldier.Team 
+			       && stationedSoldiers[FilledCapacity - 1].Tenure == soldier.March[soldier.March.Count - 1].Value;
 		}
 
 		public virtual void Receive(Soldier soldier)
@@ -42,9 +45,38 @@ namespace royalgameofur
 			if (FilledCapacity >= MaxCapacity) return;
 			stationedSoldiers.Add(soldier);
 			FilledCapacity++;
+			soldier.CurrentTile?.strategy.Discharge(soldier);
 			soldier.CurrentTile = GetParent<Tile>();
 			soldier.ZIndex = FilledCapacity;
-			soldier.GetParent<Squad>()._On_Dice_Roll(3);
+			soldier.PreviousZIndex = soldier.ZIndex;
+		}
+
+		protected void MayBeAttack(Soldier soldier)
+		{
+			if (FilledCapacity != 0 
+			    && stationedSoldiers[0].Team != soldier.Team 
+			    && stationedSoldiers[0].Tenure == soldier.Tenure)
+			{
+				stationedSoldiers[0].Retreat();
+			}
+		}
+
+		public virtual void Discharge(Soldier soldier)
+		{
+			if (!stationedSoldiers.Exists(each => each == soldier)) return;
+			FilledCapacity--;
+			stationedSoldiers.Remove(soldier);
+		}
+
+		public bool HasSoldiers(PlayerTeam currentTurn)
+		{
+			return stationedSoldiers.Any(soldier => soldier.Team == currentTurn && !soldier.blocked);
+		}
+
+		public Soldier TopSoldier()
+		{
+			if (FilledCapacity != 0) return stationedSoldiers[FilledCapacity - 1];
+			return null;
 		}
 	}
 }

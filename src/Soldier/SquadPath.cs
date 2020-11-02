@@ -66,11 +66,11 @@ namespace royalgameofur
                     SoldierTenure.Private));
             Path.Add(
                 new KeyValuePair<Tile, SoldierTenure>(
-                    AllTiles.GetNode("BridgeCamp") as Tile,
+                    AllTiles.GetNode("BridgeCity") as Tile,
                     SoldierTenure.Private));
             Path.Add(
                 new KeyValuePair<Tile, SoldierTenure>(
-                    AllTiles.GetNode("BridgeCity") as Tile,
+                    AllTiles.GetNode("BridgeCamp") as Tile,
                     SoldierTenure.Private));
             
             // after bridge
@@ -92,17 +92,17 @@ namespace royalgameofur
                     SoldierTenure.Veteran));
             Path.Add(
                 new KeyValuePair<Tile, SoldierTenure>(
-                    AllTiles.GetNode(teamString + "Temple2") as Tile,
+                    AllTiles.GetNode(otherString + "Temple2") as Tile,
                     SoldierTenure.Veteran));
             
             // finish line
+            Path.Add(new KeyValuePair<Tile, SoldierTenure>(
+                AllTiles.GetNode("BridgeCamp") as Tile,
+                SoldierTenure.Veteran));
             Path.Add(
                 new KeyValuePair<Tile, SoldierTenure>(
                     AllTiles.GetNode("BridgeCity") as Tile,
                     SoldierTenure.Veteran));
-            Path.Add(new KeyValuePair<Tile, SoldierTenure>(
-                AllTiles.GetNode("BridgeCamp") as Tile,
-                SoldierTenure.Veteran));
             Path.Add(
                 new KeyValuePair<Tile, SoldierTenure>(
                     AllTiles.GetNode("BridgeRoad") as Tile,
@@ -136,7 +136,7 @@ namespace royalgameofur
                 -1: Path.FindIndex(keyValue => 
                     keyValue.Key == findValue.Key 
                     && keyValue.Value == findValue.Value);
-            return currentIndex + steps > Path.Count ? null : Path.GetRange(currentIndex + 1, steps);
+            return currentIndex + 1 + steps > Path.Count ? null : Path.GetRange(currentIndex + 1, steps);
         }
     }
 

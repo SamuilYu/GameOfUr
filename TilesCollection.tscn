@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://src/Tile/TileType/CampTile.cs" type="Script" id=1]
 [ext_resource path="res://src/Tile/TileType/PyramidTile.cs" type="Script" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://Tile.tscn" type="PackedScene" id=6]
 [ext_resource path="res://src/Tile/TileType/SacredTile.cs" type="Script" id=7]
 [ext_resource path="res://src/Tile/TileType/BattlegroundTile.cs" type="Script" id=8]
+[ext_resource path="res://src/Tile/TileType/ReleaseTile.cs" type="Script" id=9]
 
 [node name="TilesCollection" type="Node2D"]
 
@@ -135,4 +136,4 @@ script = ExtResource( 2 )
 position = Vector2( 910, 300 )
 
 [node name="Type" type="Node2D" parent="Release"]
-script = ExtResource( 4 )
+script = ExtResource( 9 )
