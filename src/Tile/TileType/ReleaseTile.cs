@@ -14,8 +14,9 @@ namespace royalgameofur
         public override void Receive(Soldier soldier)
         {
             soldier.CurrentTile?.strategy.Discharge(soldier);
-            soldier.EndTurn();
+            Squad squad = soldier.GetParent<Squad>();
             soldier.GetParent().RemoveChild(soldier);
+            squad.EndTurn();
             soldier.QueueFree();
         }
 

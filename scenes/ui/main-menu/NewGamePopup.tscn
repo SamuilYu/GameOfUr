@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://textures/ui/panel_texture.tres" type="StyleBox" id=1]
 [ext_resource path="res://fonts/CommanderPromptFont.tres" type="DynamicFont" id=2]
 [ext_resource path="res://src/UI/NewGamePopup.cs" type="Script" id=3]
+[ext_resource path="res://src/UI/NameLineEdit.cs" type="Script" id=4]
 
 [node name="NewGamePopup" type="Control"]
 pause_mode = 2
@@ -63,6 +64,8 @@ margin_left = 69.0
 margin_top = 48.0
 margin_right = 339.0
 margin_bottom = 79.0
+align = 1
+script = ExtResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -86,6 +89,7 @@ margin_top = 36.3967
 margin_right = 235.254
 margin_bottom = 67.3967
 align = 1
+script = ExtResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -101,6 +105,7 @@ margin_right = 719.797
 margin_bottom = 451.251
 rect_pivot_offset = Vector2( 130.5, 46.5 )
 custom_fonts/font = ExtResource( 2 )
+disabled = true
 text = "Start Game"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -121,5 +126,11 @@ text = "Back to Menu"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+[connection signal="EmptyName" from="Popup/WhiteLabel/LineEdit" to="." method="EmptyName"]
+[connection signal="NonEmptyName" from="Popup/WhiteLabel/LineEdit" to="." method="NonEmptyName"]
+[connection signal="text_changed" from="Popup/WhiteLabel/LineEdit" to="Popup/WhiteLabel/LineEdit" method="NameChanged"]
+[connection signal="EmptyName" from="Popup/BlackLabel/LineEdit" to="." method="EmptyName"]
+[connection signal="NonEmptyName" from="Popup/BlackLabel/LineEdit" to="." method="NonEmptyName"]
+[connection signal="text_changed" from="Popup/BlackLabel/LineEdit" to="Popup/BlackLabel/LineEdit" method="NameChanged"]
 [connection signal="pressed" from="Popup/StartGame" to="." method="StartGame"]
 [connection signal="pressed" from="Popup/Back" to="." method="Back"]
