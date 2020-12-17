@@ -1,0 +1,125 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://textures/ui/panel_texture.tres" type="StyleBox" id=1]
+[ext_resource path="res://fonts/CommanderPromptFont.tres" type="DynamicFont" id=2]
+[ext_resource path="res://src/UI/NewGamePopup.cs" type="Script" id=3]
+
+[node name="NewGamePopup" type="Control"]
+pause_mode = 2
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 2.24756
+margin_top = -0.749146
+margin_right = 591.248
+margin_bottom = 378.251
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_left = -553.5
+margin_top = -422.5
+margin_right = 1261.5
+margin_bottom = 917.5
+color = Color( 0, 0, 0, 0.572549 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Popup" type="PopupDialog" parent="."]
+visible = true
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -210.0
+margin_top = -145.0
+margin_right = 210.0
+margin_bottom = 145.0
+custom_styles/panel = ExtResource( 1 )
+popup_exclusive = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="WhiteLabel" type="Label" parent="Popup"]
+margin_left = 6.91711
+margin_top = 36.5033
+margin_right = 426.917
+margin_bottom = 81.5033
+custom_fonts/font = ExtResource( 2 )
+text = "White Army Commander:"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LineEdit" type="LineEdit" parent="Popup/WhiteLabel"]
+margin_left = 69.0
+margin_top = 48.0
+margin_right = 339.0
+margin_bottom = 79.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BlackLabel" type="Label" parent="Popup"]
+margin_left = 112.02
+margin_top = 127.588
+margin_right = 322.02
+margin_bottom = 150.588
+custom_fonts/font = ExtResource( 2 )
+text = "Black Army Commander:"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LineEdit" type="LineEdit" parent="Popup/BlackLabel"]
+margin_left = -34.7458
+margin_top = 36.3967
+margin_right = 235.254
+margin_bottom = 67.3967
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="StartGame" type="Button" parent="Popup"]
+anchor_left = -0.862
+anchor_top = -0.736
+anchor_right = -0.862
+anchor_bottom = -0.736
+margin_left = 585.797
+margin_top = 422.251
+margin_right = 719.797
+margin_bottom = 451.251
+rect_pivot_offset = Vector2( 130.5, 46.5 )
+custom_fonts/font = ExtResource( 2 )
+text = "Start Game"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Back" type="Button" parent="Popup"]
+anchor_left = -0.862
+anchor_top = -0.702
+anchor_right = -0.862
+anchor_bottom = -0.702
+margin_left = 428.449
+margin_top = 413.258
+margin_right = 554.449
+margin_bottom = 442.258
+rect_pivot_offset = Vector2( 130.5, 46.5 )
+custom_fonts/font = ExtResource( 2 )
+text = "Back to Menu"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="pressed" from="Popup/StartGame" to="." method="StartGame"]
+[connection signal="pressed" from="Popup/Back" to="." method="Back"]

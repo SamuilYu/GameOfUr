@@ -11,7 +11,7 @@ public class TilePopupMenu : CanvasLayer
 
     public override void _Ready()
     {
-        Connect("SelectSoldier", GetParent(), "SelectTopSoldier");
+        Connect("SelectSoldier", GetParent(), "MayBeSelectTopSoldier");
         Connect("MakeSoldierMarch", GetParent(), "MakeSoldierMarch");
     }
 
@@ -20,10 +20,5 @@ public class TilePopupMenu : CanvasLayer
         if (id == 0) EmitSignal("SelectSoldier");
         if (id == 1) EmitSignal("MakeSoldierMarch");
     }
-
-//  // Called every frame. 'delta' is the elapsed time since the previous frame.
-//  public override void _Process(float delta)
-//  {
-//      
-//  }
+    
 }

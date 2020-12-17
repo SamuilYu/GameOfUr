@@ -1,0 +1,57 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://fonts/CuneiformMenuFont.tres" type="DynamicFont" id=1]
+[ext_resource path="res://src/UI/CustomMenuButton.cs" type="Script" id=2]
+[ext_resource path="res://textures/ui/FocusStyleBox.tres" type="StyleBox" id=3]
+[ext_resource path="res://src/UI/CustomMenuList.cs" type="Script" id=4]
+
+[node name="CustomMenuList" type="VBoxContainer"]
+margin_left = 13.0
+margin_top = 9.0
+margin_right = 759.0
+margin_bottom = 467.0
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button1" type="Button" parent="."]
+margin_right = 746.0
+margin_bottom = 150.0
+rect_min_size = Vector2( 0, 150 )
+custom_styles/focus = ExtResource( 3 )
+custom_fonts/font = ExtResource( 1 )
+text = "New Game"
+flat = true
+script = ExtResource( 2 )
+
+[node name="Button2" type="Button" parent="."]
+margin_top = 154.0
+margin_right = 746.0
+margin_bottom = 304.0
+rect_min_size = Vector2( 0, 150 )
+custom_styles/focus = ExtResource( 3 )
+custom_fonts/font = ExtResource( 1 )
+text = "Settings"
+flat = true
+script = ExtResource( 2 )
+
+[node name="Button3" type="Button" parent="."]
+margin_top = 308.0
+margin_right = 746.0
+margin_bottom = 458.0
+rect_min_size = Vector2( 0, 150 )
+custom_styles/focus = ExtResource( 3 )
+custom_fonts/font = ExtResource( 1 )
+text = "Quit"
+flat = true
+script = ExtResource( 2 )
+[connection signal="mouse_entered" from="Button1" to="Button1" method="OnMouseEnter"]
+[connection signal="mouse_exited" from="Button1" to="Button1" method="OnMouseExit"]
+[connection signal="pressed" from="Button1" to="." method="NewGamePressed"]
+[connection signal="mouse_entered" from="Button2" to="Button2" method="OnMouseEnter"]
+[connection signal="mouse_exited" from="Button2" to="Button2" method="OnMouseExit"]
+[connection signal="pressed" from="Button2" to="." method="SettingsPressed"]
+[connection signal="mouse_entered" from="Button3" to="Button3" method="OnMouseEnter"]
+[connection signal="mouse_exited" from="Button3" to="Button3" method="OnMouseExit"]
+[connection signal="pressed" from="Button3" to="." method="QuitPressed"]

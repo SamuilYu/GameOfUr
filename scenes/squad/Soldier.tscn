@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://src/Soldier/Soldier.cs" type="Script" id=1]
+
+[node name="Soldier" type="KinematicBody2D"]
+position = Vector2( 231.931, 181.019 )
+z_index = 1
+z_as_relative = false
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Icon" type="Sprite" parent="."]

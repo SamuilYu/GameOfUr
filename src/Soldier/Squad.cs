@@ -9,7 +9,9 @@ namespace royalgameofur
         [Signal]
         delegate void ReRoll();
         
-        private Soldier ActiveSoldier;
+        [Signal]
+        public delegate void EndThisTurn();
+        
         private SquadPath Path = new SquadPath();
         
         [Export()]
@@ -21,6 +23,11 @@ namespace royalgameofur
         public override void _Ready()
         {
             Path.SetPath(this);
+            InitSkipButton();
+        }
+
+        private void InitSkipButton()
+        {
             var diceSkipButton = GetParent().GetParent().GetNode<Dice>("3D2 Dice").GetNode<Button>("SkipButton");
             GetNode<Button>("SkipButton").SetGlobalPosition(diceSkipButton.GetGlobalRect().Position);
             GetNode<Button>("SkipButton").Hide();
@@ -31,12 +38,15 @@ namespace royalgameofur
             var shouldSkip = true;
             foreach (var child in GetChildren())
             {
+                // wake every soldier
                 if (!(child is Soldier soldier)) continue;
+                soldier.Wake();
+                
+                // calculate march for every soldier and show skip button if appropriate
                 List<KeyValuePair<Tile, SoldierTenure>> nextTiles = Path.GetNext(soldier.CurrentTile, soldier.Tenure, steps);
                 soldier.March = nextTiles;
                 if (nextTiles != null && nextTiles[nextTiles.Count - 1].Key.CheckPlaceForSoldier(soldier, false))
                     shouldSkip = false;
-                soldier.Wake();
             }
             GetNode<SquadBase>("SquadBase").Wake();
             if (shouldSkip)
@@ -45,19 +55,15 @@ namespace royalgameofur
             }
         }
 
-        public void _On_SoldierPressed(Soldier pressedSoldier)
+        public void WhenSoldierPressedDeselectOthers(Soldier pressedSoldier)
         {
             foreach (var child in GetChildren())
             {
                 if (child is Soldier soldier && soldier != pressedSoldier) soldier.Unselect();
             }
-            ActiveSoldier = pressedSoldier;
-            if (ActiveSoldier.March == null) return;
-            Tile destination = ActiveSoldier.March[ActiveSoldier.March.Count - 1].Key;
-            destination.CheckPlaceForSoldier(ActiveSoldier);
         }
 
-        public void EndTurn()
+        private void DeselectEverything()
         {
             foreach (var child in GetChildren())
             {
@@ -68,21 +74,18 @@ namespace royalgameofur
                 }
                 if (child is SquadBase squadBase) squadBase.Sleep();
             }
-            GetParent<Player>().EndThisTurn();
+        }
+
+        public void EndTurn()
+        {
+            DeselectEverything();
             GetNode<Button>("SkipButton").Hide();
+            EmitSignal("EndThisTurn");
         }
 
         public void MakeReRoll()
         {
-            foreach (var child in GetChildren())
-            {
-                if (child is Soldier soldier)
-                {
-                    soldier.Unselect();
-                    soldier.Sleep();
-                }
-                if (child is SquadBase squadBase) squadBase.Sleep();
-            }
+            DeselectEverything();
             EmitSignal("ReRoll");
         }
     }

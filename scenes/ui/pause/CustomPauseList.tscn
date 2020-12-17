@@ -1,0 +1,94 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://src/UI/CustomMenuButton.cs" type="Script" id=1]
+[ext_resource path="res://fonts/PauseCuneiform.tres" type="DynamicFont" id=2]
+[ext_resource path="res://src/UI/CustomPauseList.cs" type="Script" id=3]
+[ext_resource path="res://textures/ui/PauseFocusStyleBox.tres" type="StyleBox" id=4]
+
+[node name="CustomPauseList" type="VBoxContainer"]
+margin_right = 364.0
+margin_bottom = 290.0
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button1" type="Button" parent="."]
+margin_right = 364.0
+margin_bottom = 45.0
+custom_styles/focus = ExtResource( 4 )
+custom_fonts/font = ExtResource( 2 )
+text = "Continue"
+flat = true
+script = ExtResource( 1 )
+
+[node name="Button6" type="Button" parent="."]
+margin_top = 49.0
+margin_right = 364.0
+margin_bottom = 94.0
+custom_styles/focus = ExtResource( 4 )
+custom_fonts/font = ExtResource( 2 )
+text = "Replay"
+flat = true
+script = ExtResource( 1 )
+
+[node name="Button2" type="Button" parent="."]
+margin_top = 98.0
+margin_right = 364.0
+margin_bottom = 143.0
+custom_styles/focus = ExtResource( 4 )
+custom_fonts/font = ExtResource( 2 )
+text = "Rules"
+flat = true
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button3" type="Button" parent="."]
+margin_top = 147.0
+margin_right = 364.0
+margin_bottom = 192.0
+custom_styles/focus = ExtResource( 4 )
+custom_fonts/font = ExtResource( 2 )
+text = "Settings"
+flat = true
+script = ExtResource( 1 )
+
+[node name="Button4" type="Button" parent="."]
+margin_top = 196.0
+margin_right = 364.0
+margin_bottom = 241.0
+custom_styles/focus = ExtResource( 4 )
+custom_fonts/font = ExtResource( 2 )
+text = "To Main Menu"
+flat = true
+script = ExtResource( 1 )
+
+[node name="Button5" type="Button" parent="."]
+margin_top = 245.0
+margin_right = 364.0
+margin_bottom = 290.0
+custom_styles/focus = ExtResource( 4 )
+custom_fonts/font = ExtResource( 2 )
+text = "Quit"
+flat = true
+script = ExtResource( 1 )
+[connection signal="mouse_entered" from="Button1" to="Button1" method="OnMouseEnter"]
+[connection signal="mouse_exited" from="Button1" to="Button1" method="OnMouseExit"]
+[connection signal="pressed" from="Button1" to="." method="ContinuePressed"]
+[connection signal="mouse_entered" from="Button6" to="Button6" method="OnMouseEnter"]
+[connection signal="mouse_exited" from="Button6" to="Button6" method="OnMouseExit"]
+[connection signal="pressed" from="Button6" to="." method="ReplayPressed"]
+[connection signal="mouse_entered" from="Button2" to="Button2" method="OnMouseEnter"]
+[connection signal="mouse_exited" from="Button2" to="Button2" method="OnMouseExit"]
+[connection signal="pressed" from="Button2" to="." method="RulesPressed"]
+[connection signal="mouse_entered" from="Button3" to="Button3" method="OnMouseEnter"]
+[connection signal="mouse_exited" from="Button3" to="Button3" method="OnMouseExit"]
+[connection signal="pressed" from="Button3" to="." method="SettingsPressed"]
+[connection signal="mouse_entered" from="Button4" to="Button4" method="OnMouseEnter"]
+[connection signal="mouse_exited" from="Button4" to="Button4" method="OnMouseExit"]
+[connection signal="pressed" from="Button4" to="." method="ToMainMenuPressed"]
+[connection signal="mouse_entered" from="Button5" to="Button5" method="OnMouseEnter"]
+[connection signal="mouse_exited" from="Button5" to="Button5" method="OnMouseExit"]
+[connection signal="pressed" from="Button5" to="." method="QuitPressed"]

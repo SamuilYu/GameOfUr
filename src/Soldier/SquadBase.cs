@@ -6,14 +6,17 @@ namespace royalgameofur
     public class SquadBase : Node2D
     {
         private List<Soldier> QuateredSoldiers = new List<Soldier>();
-        private Button button;
+        private CollisionShape2D button;
+        private List<RectangleShape2D> Shapes = new List<RectangleShape2D>();
+        private bool Awake { get; set; }
+        
 
-        public override void _Ready()
+        public void _On_Pressed()
         {
-            button = GetNode<Button>("BaseButton");
-            button.Connect("pressed", this, "SelectSoldier");
-            button.Flat = true;
-            button.MouseFilter = Control.MouseFilterEnum.Ignore;
+            if (Awake)
+            {
+                SelectSoldier();
+            }
         }
 
         private void SelectSoldier()
@@ -38,25 +41,35 @@ namespace royalgameofur
             soldier.ZIndex = 1;
             soldier.PreviousZIndex = 1;
             QuateredSoldiers.Add(soldier);
-            button.SetSize(new Vector2(QuateredSoldiers.Count * 90,90));
-            if (QuateredSoldiers.Count != 1) button.SetGlobalPosition(button.RectGlobalPosition + new Vector2(-90, 0));
+            SetAreaLength(QuateredSoldiers.Count);
         }
 
         public void Discharge(Soldier soldier)
         {
             if (!QuateredSoldiers.Exists(each => each == soldier)) return;
             QuateredSoldiers.RemoveAt(QuateredSoldiers.Count - 1);
-            button.MouseFilter = Control.MouseFilterEnum.Ignore;
-            button.Flat = true;
-            if (QuateredSoldiers.Count != 0) button.SetSize(new Vector2(QuateredSoldiers.Count * 90,90));
-            if (QuateredSoldiers.Count != 0) button.SetGlobalPosition(button.RectGlobalPosition + new Vector2(90, 0));
+            SetAreaLength(QuateredSoldiers.Count);
+            Sleep();
+        }
+
+        private void SetAreaLength(int quateredSoldiersCount)
+        {
+            HideAllAreas();
+            GetNode<Area2D>("SquadBaseArea" + quateredSoldiersCount).Show();
+        }
+
+        private void HideAllAreas()
+        {
+            foreach (var child in GetChildren())
+            {
+                if (child is Area2D area2D) area2D.Hide();
+            }
         }
 
         public void Wake()
         {
+            Awake = true;
             if (QuateredSoldiers == null || QuateredSoldiers.Count == 0) return;
-            button.MouseFilter = Control.MouseFilterEnum.Stop;
-            button.Flat = false;
             foreach (var soldier in QuateredSoldiers)
             {
                 soldier.Sleep();
@@ -65,8 +78,7 @@ namespace royalgameofur
 
         public void Sleep()
         {
-            button.Flat = true;
-            button.MouseFilter = Control.MouseFilterEnum.Ignore;
+            Awake = false;
         }
     }
 }

@@ -20,21 +20,5 @@ public class Player : Node2D
     private void NewTurn()
     {
         GD.Print("My turn!");
-        foreach (var child in GetParent().GetNode("Board").GetNode("TilesCollection").GetChildren())
-        {
-            if (child is Tile tile)
-            {
-                switch (GetNode<Squad>("Squad").Team)
-                {
-                    case PlayerTeam.Black:
-                        tile.TileDetails.RectGlobalPosition = new Vector2(275, 365);
-                        break;
-                    case PlayerTeam.White:
-                        tile.TileDetails.RectGlobalPosition = new Vector2(275, 137);
-                        break;
-                }
-            }
-        }
-        
     }
 }

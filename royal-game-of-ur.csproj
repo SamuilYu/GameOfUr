@@ -3,4 +3,7 @@
     <TargetFramework>net472</TargetFramework>
     <RootNamespace>royalgameofur</RootNamespace>
   </PropertyGroup>
+  <ItemGroup>
+    <Folder Include="scenes\tile" />
+  </ItemGroup>
 </Project>

@@ -8,108 +8,84 @@ namespace royalgameofur
     {
         [Signal]
         delegate void SoldierPressed(Soldier soldier);
-        private Texture BlackPrivateTexture { get; set; }
-        private Texture BlackVeteranTexture { get; set; }
-        private Texture WhitePrivateTexture { get; set; }
-        private Texture WhiteVeteranTexture { get; set; }
+        
         public List<KeyValuePair<Tile, SoldierTenure>> March { get; set; }
 
         public PlayerTeam Team;
         internal SoldierTenure Tenure;
-        public Button Button;
+        private Sprite Icon;
         internal Tile CurrentTile;
         public bool blocked;
         private Vector2 Speed;
         private bool CanMove;
         public int PreviousZIndex = 1;
+        private SoldierTexturesKeeper keeper;
+        private bool Awake { get; set; }
 
-        public Soldier()
-        {
-            BlackPrivateTexture = GD.Load("res://textures/soldiers/BlackPrivate.png") as Texture;
-            BlackVeteranTexture = GD.Load("res://textures/soldiers/BlackVeteran.png") as Texture;
-            WhitePrivateTexture = GD.Load("res://textures/soldiers/WhitePrivate.png") as Texture;
-            WhiteVeteranTexture = GD.Load("res://textures/soldiers/WhiteVeteran.png") as Texture;
-        }
+
 
         public override void _Ready()
         {
+            keeper = new SoldierTexturesKeeper();
             blocked = false;
             CanMove = false;
-            Button = GetNode<Button>("SoldierButton");
-            Button.Connect("pressed", this, "Select");
-            Button.Flat = true;
-            Button.MouseFilter = Control.MouseFilterEnum.Ignore;
-            Connect(nameof(SoldierPressed), GetParent<Squad>(), "_On_SoldierPressed");
+
+            Connect(nameof(SoldierPressed), GetParent<Squad>(), "WhenSoldierPressedDeselectOthers");
+            
             Tenure = SoldierTenure.Private;
             Team = GetParent<Squad>().Team;
-            SetIcon();
+            Icon = GetNode<Sprite>("Icon");
+            Icon.Texture = keeper.GetTexture(Tenure, Team);
+            GetNode<Sprite>("Icon").Scale = 
+                new Vector2((float)80/Icon.Texture.GetWidth(), 
+                            (float)80/Icon.Texture.GetHeight());
+            
             Retreat();
             Sleep();
         }
 
         public void ChangeTenure(SoldierTenure newTenure)
         {
-            this.Tenure = newTenure;
-            SetIcon();
+            Tenure = newTenure;
+            Icon.Texture = keeper.GetTexture(Tenure, Team);
+            GetNode<Sprite>("Icon").Scale = 
+                new Vector2((float)80/Icon.Texture.GetWidth(), 
+                            (float)80/Icon.Texture.GetHeight());
         }
 
         public void Wake()
         {
-            if (!blocked) Button.MouseFilter = Control.MouseFilterEnum.Stop;
+            if (!blocked) Awake = true;
         }
 
         public void Sleep()
         {
-            Button.MouseFilter = Control.MouseFilterEnum.Ignore;
+            Awake = false;
         }
 
         public void Select()
         {
+            if (March == null) return;
+            
+            // raise soldier above everyone else
             PreviousZIndex = ZIndex;
             ZIndex = 6;
+            
+            // inform squad, so that other soldiers get deselected
             EmitSignal(nameof(SoldierPressed), this);
+            
+            // check if destination can receive soldier
+            Tile destination = March[March.Count - 1].Key;
+            destination.CheckPlaceForSoldier(this);
         }
 
         public void Unselect()
         {
+            // return soldier to height before selection
             ZIndex = PreviousZIndex;
+            
+            // soldier's potential destination gets deselected
             if (March?.Count != 0) March?[March.Count - 1].Key.Unselect();
-        }
-
-        private void SetIcon()
-        {
-            switch (Tenure)
-            {
-                case SoldierTenure.Private:
-                    switch (Team)
-                    {
-                        case PlayerTeam.White:
-                            Button.Icon = WhitePrivateTexture;
-                            break;
-                        case PlayerTeam.Black:
-                            Button.Icon = BlackPrivateTexture;
-                            break;
-                        default:
-                            throw new ArgumentOutOfRangeException();
-                    }
-                    break;
-                case SoldierTenure.Veteran:
-                case SoldierTenure.Switch:
-                    switch (Team)
-                    {
-                        case PlayerTeam.White:
-                            Button.Icon = WhiteVeteranTexture;
-                            break;
-                        case PlayerTeam.Black:
-                            Button.Icon = BlackVeteranTexture;
-                            break;
-                        default:
-                            throw new ArgumentOutOfRangeException();
-                    }
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
         }
 
         public void Retreat()
@@ -121,6 +97,9 @@ namespace royalgameofur
         public void MarchOn()
         {
             GetParent<Squad>().GetNode<SquadBase>("SquadBase").Discharge(this);
+            CurrentTile?.strategy.Discharge(this);
+            
+            // soldier can start moving in the direction of the first tile
             CanMove = true;
             if (March.Count != 0) Speed = (March[0].Key.GlobalPosition - this.GlobalPosition).Normalized() * 150;
         }
@@ -135,16 +114,20 @@ namespace royalgameofur
                 return;
             }
             
+            // clip to position when small enough distance
             var distance = (March[0].Key.GlobalPosition - this.GlobalPosition).Length();
             if (CanMove && distance < 10)
             {
-                this.GlobalPosition = March[0].Key.GlobalPosition;
+                GlobalPosition = March[0].Key.GlobalPosition;
+                
+                // in case the destination is reached
                 if (March.Count == 1)
                 {
                     CanMove = false;
                     March[0].Key.reached = true;
                     ChangeTenure(March[0].Value);
                 }
+                
                 March.RemoveAt(0);
                 if (March.Count != 0) Speed = (March[0].Key.GlobalPosition - this.GlobalPosition).Normalized() * 200;
                 return;
@@ -156,6 +139,11 @@ namespace royalgameofur
         public void EndTurn()
         {
             GetParent<Squad>().EndTurn();
+        }
+
+        public bool IsAwake()
+        {
+            return Awake;
         }
     }
 }

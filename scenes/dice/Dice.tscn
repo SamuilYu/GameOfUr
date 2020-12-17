@@ -1,8 +1,10 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://Die.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/dice/Die.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/Dice/Dice.cs" type="Script" id=2]
-[ext_resource path="res://MainFont.tres" type="DynamicFont" id=3]
+[ext_resource path="res://fonts/MainFont.tres" type="DynamicFont" id=3]
+
+
 
 [node name="Dice" type="Node2D"]
 script = ExtResource( 2 )

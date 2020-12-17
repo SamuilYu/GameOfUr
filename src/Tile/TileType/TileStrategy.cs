@@ -48,11 +48,11 @@ namespace royalgameofur
 			if (FilledCapacity >= MaxCapacity) return;
 			stationedSoldiers.Add(soldier);
 			FilledCapacity++;
-			soldier.CurrentTile?.strategy.Discharge(soldier);
+			
 			soldier.CurrentTile = GetParent<Tile>();
 			soldier.ZIndex = FilledCapacity;
 			soldier.PreviousZIndex = soldier.ZIndex;
-			DrawTower();
+			// DrawTower();
 		}
 
 		protected void MayBeAttack(Soldier soldier)
@@ -70,7 +70,7 @@ namespace royalgameofur
 			if (!stationedSoldiers.Exists(each => each == soldier)) return;
 			FilledCapacity--;
 			stationedSoldiers.Remove(soldier);
-			DrawTower();
+			// DrawTower();
 		}
 
 		public bool HasSoldiers(PlayerTeam currentTurn)
@@ -86,47 +86,47 @@ namespace royalgameofur
 			return null;
 		}
 
-		protected virtual void DrawTower()
-		{
-			var places = GetParent<Tile>().TileDetails
-				.GetNode("DetailsContainer")
-				.GetNode("Places").GetChildren();
-			if (FilledCapacity == 1)
-			{
-				if (places[0] is Button button0) button0.Icon = null;
-				if (places[1] is Button button1) button1.Icon = null;
-				if (places[2] is Button button2) button2.Icon = stationedSoldiers[0].Button.Icon;
-				if (places[3] is Button button3) button3.Icon = null;
-			} 
-			else if (FilledCapacity == 2)
-			{
-				if (places[0] is Button button0) button0.Icon = null;
-				if (places[1] is Button button1) button1.Icon = stationedSoldiers[0].Button.Icon;
-				if (places[2] is Button button2) button2.Icon = stationedSoldiers[1].Button.Icon;
-				if (places[3] is Button button3) button3.Icon = null;
-
-			}
-			else if (FilledCapacity == 3)
-			{
-				if (places[0] is Button button0) button0.Icon = null;
-				if (places[1] is Button button1) button1.Icon = stationedSoldiers[0].Button.Icon;
-				if (places[2] is Button button2) button2.Icon = stationedSoldiers[1].Button.Icon;
-				if (places[3] is Button button3) button3.Icon = stationedSoldiers[2].Button.Icon;
-			}
-			else if (FilledCapacity == 4)
-			{
-				if (places[0] is Button button0) button0.Icon = stationedSoldiers[0].Button.Icon;
-				if (places[1] is Button button1) button1.Icon = stationedSoldiers[1].Button.Icon;
-				if (places[2] is Button button2) button2.Icon = stationedSoldiers[2].Button.Icon;
-				if (places[3] is Button button3) button3.Icon = stationedSoldiers[3].Button.Icon;
-			}
-			else if (FilledCapacity == 0)
-			{
-				if (places[0] is Button button0) button0.Icon = null;
-				if (places[1] is Button button1) button1.Icon = null;
-				if (places[2] is Button button2) button2.Icon = null;
-				if (places[3] is Button button3) button3.Icon = null;
-			}
-		}
+		// protected virtual void DrawTower()
+		// {
+		// 	var places = GetParent<Tile>().TileDetails
+		// 		.GetNode("DetailsContainer")
+		// 		.GetNode("Places").GetChildren();
+		// 	if (FilledCapacity == 1)
+		// 	{
+		// 		if (places[0] is Button button0) button0.Icon = null;
+		// 		if (places[1] is Button button1) button1.Icon = null;
+		// 		if (places[2] is Button button2) button2.Icon = stationedSoldiers[0].Button.Icon;
+		// 		if (places[3] is Button button3) button3.Icon = null;
+		// 	} 
+		// 	else if (FilledCapacity == 2)
+		// 	{
+		// 		if (places[0] is Button button0) button0.Icon = null;
+		// 		if (places[1] is Button button1) button1.Icon = stationedSoldiers[0].Button.Icon;
+		// 		if (places[2] is Button button2) button2.Icon = stationedSoldiers[1].Button.Icon;
+		// 		if (places[3] is Button button3) button3.Icon = null;
+		//
+		// 	}
+		// 	else if (FilledCapacity == 3)
+		// 	{
+		// 		if (places[0] is Button button0) button0.Icon = null;
+		// 		if (places[1] is Button button1) button1.Icon = stationedSoldiers[0].Button.Icon;
+		// 		if (places[2] is Button button2) button2.Icon = stationedSoldiers[1].Button.Icon;
+		// 		if (places[3] is Button button3) button3.Icon = stationedSoldiers[2].Button.Icon;
+		// 	}
+		// 	else if (FilledCapacity == 4)
+		// 	{
+		// 		if (places[0] is Button button0) button0.Icon = stationedSoldiers[0].Button.Icon;
+		// 		if (places[1] is Button button1) button1.Icon = stationedSoldiers[1].Button.Icon;
+		// 		if (places[2] is Button button2) button2.Icon = stationedSoldiers[2].Button.Icon;
+		// 		if (places[3] is Button button3) button3.Icon = stationedSoldiers[3].Button.Icon;
+		// 	}
+		// 	else if (FilledCapacity == 0)
+		// 	{
+		// 		if (places[0] is Button button0) button0.Icon = null;
+		// 		if (places[1] is Button button1) button1.Icon = null;
+		// 		if (places[2] is Button button2) button2.Icon = null;
+		// 		if (places[3] is Button button3) button3.Icon = null;
+		// 	}
+		// }
 	}
 }
