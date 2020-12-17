@@ -7,6 +7,17 @@ public class Player : Node2D
 {
     [Signal]
     public delegate void EndTurn();
+    
+    [Signal]
+    public delegate void NewTurnSignal(string name);
+
+    public override void _Ready()
+    {
+        if (Name == "Player2")
+        {
+            NewTurn();
+        }
+    }
 
     public void EndThisTurn()
     {
@@ -20,5 +31,11 @@ public class Player : Node2D
     private void NewTurn()
     {
         GD.Print("My turn!");
+        EmitSignal("NewTurnSignal", GetPlayerNameWrapper().GetPlayerName());
+    }
+
+    public PlayerNameWrapper GetPlayerNameWrapper()
+    {
+        return GetNode<PlayerNameWrapper>("/root/" + this.Name + "NameWrapper");
     }
 }

@@ -11,5 +11,20 @@ namespace royalgameofur
         {
             this.name = name;
         }
+
+        public string GetPossessive()
+        {
+            if (name != null && name.EndsWith("s"))
+            {
+                return name + "'";
+            }
+            
+            return name + "'s";
+        }
+
+        public string GetPlayerName()
+        {
+            return name;
+        }
     }
 }
