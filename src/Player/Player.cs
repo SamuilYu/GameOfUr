@@ -21,9 +21,13 @@ public class Player : Node2D
 
     public void EndThisTurn()
     {
-        foreach (var child in GetParent().GetChildren())
+        if (Name == "Player1")
         {
-            if (child is Player player && player != this) player.NewTurn();
+            GetParent().GetNode<Player>("Player2").NewTurn();
+        }
+        else
+        {
+            GetParent().GetNode<Player>("Player1").NewTurn();
         }
         EmitSignal("EndTurn");
     }
@@ -32,6 +36,7 @@ public class Player : Node2D
     {
         GD.Print("My turn!");
         EmitSignal("NewTurnSignal", GetPlayerNameWrapper().GetPlayerName());
+        GetTree().Paused = false;
     }
 
     public PlayerNameWrapper GetPlayerNameWrapper()

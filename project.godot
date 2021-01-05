@@ -21,8 +21,8 @@ config/icon="res://icon.png"
 
 [autoload]
 
-Player1NameWrapper="*res://src/Player/PlayerNameWrapper.cs"
-Player2NameWrapper="*res://src/Player/PlayerNameWrapper.cs"
+Player1NameWrapper="res://src/Player/PlayerNameWrapper.cs"
+Player2NameWrapper="res://src/Player/PlayerNameWrapper.cs"
 
 [display]
 
