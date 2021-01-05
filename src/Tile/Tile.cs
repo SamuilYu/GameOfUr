@@ -73,7 +73,7 @@ namespace royalgameofur
             var topSoldier = strategy.TopSoldier();
             if (topSoldier != null && topSoldier.IsAwake())
             {
-                topSoldier?.Select();
+                topSoldier.Select();
             }
         }
 

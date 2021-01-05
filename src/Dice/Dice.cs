@@ -12,14 +12,12 @@ namespace royalgameofur
         delegate void BlackRoll(int steps);
 
         public PlayerTeam currentTurn = PlayerTeam.None;
-        private Button button;
         private int totalSum = 0;
         private int rolling = 0;
+        private bool active;
 
         public override void _Ready()
         {
-            button = GetNode<Button>("DiceButton");
-            button.Connect("pressed", this, "Roll");
             NewTurn();
         }
 
@@ -39,15 +37,14 @@ namespace royalgameofur
                 default:
                     throw new ArgumentOutOfRangeException();
             }
-            button.Flat = false;
-            button.MouseFilter = Control.MouseFilterEnum.Stop;
+
+            active = true;
             GD.Print(currentTurn);
         }
 
         private void ReRoll()
         {
-            button.Flat = false;
-            button.MouseFilter = Control.MouseFilterEnum.Stop;
+            active = true;
             GD.Print(currentTurn);
         }
 
@@ -63,8 +60,8 @@ namespace royalgameofur
                     die.Roll();
                 }
             }
-            button.Flat = true;
-            button.MouseFilter = Control.MouseFilterEnum.Ignore;
+
+            active = false;
         }
 
         private void RollStopped(TwoSidedDie die)
@@ -76,5 +73,12 @@ namespace royalgameofur
             EmitSignal(currentTurn + "Roll", totalSum);
         }
 
+        public void Pressed()
+        {
+            if (active)
+            {
+                Roll();
+            }
+        }
     }
 }

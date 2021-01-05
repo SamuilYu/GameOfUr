@@ -17,9 +17,13 @@ public class TileArea : Area2D
                 {
                     tile._On_Pressed();
                 } 
+                else if (GetParent() is SquadBase squadBase)
+                {
+                    squadBase._On_Pressed();
+                }
                 else
                 {
-                    GetParent<SquadBase>()._On_Pressed();
+                    GetParent<Dice>().Pressed();
                 }
             }
     }
