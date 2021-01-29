@@ -6,4 +6,76 @@
   <ItemGroup>
     <Folder Include="scenes\tile" />
   </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="GodotCSTools" Version="1.0.0-beta9" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include=".gitignore" />
+    <Content Include="default_env.tres" />
+    <Content Include="fonts\CommanderPromptFont.tres" />
+    <Content Include="fonts\Cuneiform.otf" />
+    <Content Include="fonts\CuneiformFont.tres" />
+    <Content Include="fonts\CuneiformMenuFont.tres" />
+    <Content Include="fonts\LiberationSerif-Regular.ttf" />
+    <Content Include="fonts\MainFont.tres" />
+    <Content Include="fonts\PauseCuneiform.tres" />
+    <Content Include="Node2D.tscn" />
+    <Content Include="project.godot" />
+    <Content Include="scenes\dice\Dice.tscn" />
+    <Content Include="scenes\dice\Die.tscn" />
+    <Content Include="scenes\squad\Soldier.tscn" />
+    <Content Include="scenes\squad\Squad.tscn" />
+    <Content Include="scenes\squad\SquadBase.tscn" />
+    <Content Include="scenes\ui\main-menu\CustomMenuList.tscn" />
+    <Content Include="scenes\ui\main-menu\MainMenu.tscn" />
+    <Content Include="scenes\ui\main-menu\NewGamePopup.tscn" />
+    <Content Include="scenes\ui\pause\CustomPauseList.tscn" />
+    <Content Include="scenes\ui\pause\PausePopup.tscn" />
+    <Content Include="scenes\ui\QuitPopup.tscn" />
+    <Content Include="scenes\ui\YourTurnPopup.tscn" />
+    <Content Include="shapes\Base1.tres" />
+    <Content Include="shapes\Base2.tres" />
+    <Content Include="shapes\Base3.tres" />
+    <Content Include="shapes\Base4.tres" />
+    <Content Include="shapes\Base5.tres" />
+    <Content Include="shapes\Base6.tres" />
+    <Content Include="shapes\Base7.tres" />
+    <Content Include="textures\dice\BlackSide.png" />
+    <Content Include="textures\dice\BlackSide.png.import" />
+    <Content Include="textures\dice\WhiteSide.png" />
+    <Content Include="textures\dice\WhiteSide.png.import" />
+    <Content Include="textures\soldiers\BlackPrivate.png" />
+    <Content Include="textures\soldiers\BlackPrivate.png.import" />
+    <Content Include="textures\soldiers\BlackVeteran.png" />
+    <Content Include="textures\soldiers\BlackVeteran.png.import" />
+    <Content Include="textures\soldiers\WhitePrivate.png" />
+    <Content Include="textures\soldiers\WhitePrivate.png.import" />
+    <Content Include="textures\soldiers\WhiteVeteran.png" />
+    <Content Include="textures\soldiers\WhiteVeteran.png.import" />
+    <Content Include="textures\tiles\CampTile.png" />
+    <Content Include="textures\tiles\CampTile.png.import" />
+    <Content Include="textures\tiles\CityTile.png" />
+    <Content Include="textures\tiles\CityTile.png.import" />
+    <Content Include="textures\tiles\PyramidTile.png" />
+    <Content Include="textures\tiles\PyramidTile.png.import" />
+    <Content Include="textures\tiles\RoadTile.png" />
+    <Content Include="textures\tiles\RoadTile.png.import" />
+    <Content Include="textures\tiles\SacredTile.png" />
+    <Content Include="textures\tiles\SacredTile.png.import" />
+    <Content Include="textures\tiles\TempleTile.png" />
+    <Content Include="textures\tiles\TempleTile.png.import" />
+    <Content Include="textures\ui\BoardBackground.png" />
+    <Content Include="textures\ui\BoardBackground.png.import" />
+    <Content Include="textures\ui\FocusStyle.png" />
+    <Content Include="textures\ui\FocusStyle.png.import" />
+    <Content Include="textures\ui\FocusStyleBox.tres" />
+    <Content Include="textures\ui\MainMenuBackground.png" />
+    <Content Include="textures\ui\MainMenuBackground.png.import" />
+    <Content Include="textures\ui\PanelTexture.png" />
+    <Content Include="textures\ui\PanelTexture.png.import" />
+    <Content Include="textures\ui\panel_texture.tres" />
+    <Content Include="textures\ui\PauseFocusStyle.png" />
+    <Content Include="textures\ui\PauseFocusStyle.png.import" />
+    <Content Include="textures\ui\PauseFocusStyleBox.tres" />
+  </ItemGroup>
 </Project>
