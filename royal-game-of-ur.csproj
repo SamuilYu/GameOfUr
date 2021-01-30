@@ -66,6 +66,8 @@
     <Content Include="textures\tiles\SacredTile.png.import" />
     <Content Include="textures\tiles\TempleTile.png" />
     <Content Include="textures\tiles\TempleTile.png.import" />
+    <Content Include="textures\ui\blackFlag.png" />
+    <Content Include="textures\ui\blackFlag.png.import" />
     <Content Include="textures\ui\BoardBackground.png" />
     <Content Include="textures\ui\BoardBackground.png.import" />
     <Content Include="textures\ui\FocusStyle.png" />
@@ -79,5 +81,9 @@
     <Content Include="textures\ui\PauseFocusStyle.png" />
     <Content Include="textures\ui\PauseFocusStyle.png.import" />
     <Content Include="textures\ui\PauseFocusStyleBox.tres" />
+    <Content Include="textures\ui\tracker.png" />
+    <Content Include="textures\ui\tracker.png.import" />
+    <Content Include="textures\ui\whiteFlag.png" />
+    <Content Include="textures\ui\whiteFlag.png.import" />
   </ItemGroup>
 </Project>
