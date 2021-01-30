@@ -1,0 +1,87 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://fonts/CommanderPromptFont.tres" type="DynamicFont" id=1]
+[ext_resource path="res://textures/ui/PanelTexture.png" type="Texture" id=2]
+[ext_resource path="res://src/UI/EndGamePopup.cs" type="Script" id=3]
+
+[sub_resource type="StyleBoxTexture" id=1]
+texture = ExtResource( 2 )
+region_rect = Rect2( 0, 0, 629, 595 )
+
+[node name="EndGamePopup" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -550.0
+margin_top = -400.0
+margin_right = 550.0
+margin_bottom = 400.0
+color = Color( 0, 0, 0, 0.57 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Popup" type="PopupDialog" parent="."]
+visible = true
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -140.0
+margin_top = -100.0
+margin_right = 140.0
+margin_bottom = 100.0
+custom_styles/panel = SubResource( 1 )
+
+[node name="Rematch" type="Button" parent="Popup"]
+anchor_left = 0.15
+anchor_top = 0.7
+anchor_right = 0.45
+anchor_bottom = 0.8
+margin_left = -6.6629
+margin_right = 5.3371
+margin_bottom = 2.0
+custom_fonts/font = ExtResource( 1 )
+text = "Rematch"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MainMenu" type="Button" parent="Popup"]
+anchor_left = 0.52
+anchor_top = 0.7
+anchor_right = 0.85
+anchor_bottom = 0.8
+margin_left = -6.6629
+margin_right = 5.3371
+margin_bottom = 2.0
+custom_fonts/font = ExtResource( 1 )
+text = "Main Menu"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Popup"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -99.0
+margin_top = -70.0
+margin_right = 102.0
+margin_bottom = 24.0
+bbcode_enabled = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="pressed" from="Popup/Rematch" to="." method="Rematch"]
+[connection signal="pressed" from="Popup/MainMenu" to="." method="MainMenu"]

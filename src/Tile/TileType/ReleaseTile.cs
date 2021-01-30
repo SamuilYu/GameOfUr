@@ -15,6 +15,7 @@ namespace royalgameofur
         {
             soldier.CurrentTile?.strategy.Discharge(soldier);
             Squad squad = soldier.GetParent<Squad>();
+            squad.Tracker--;
             soldier.GetParent().RemoveChild(soldier);
             squad.EndTurn();
             soldier.QueueFree();

@@ -55,7 +55,8 @@ namespace royalgameofur
         private void SetAreaLength(int quateredSoldiersCount)
         {
             HideAllAreas();
-            GetNode<Area2D>("SquadBaseArea" + quateredSoldiersCount).Show();
+            if (quateredSoldiersCount > 0)
+                GetNode<Area2D>("SquadBaseArea" + quateredSoldiersCount).Show();
         }
 
         private void HideAllAreas()

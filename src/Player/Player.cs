@@ -7,7 +7,7 @@ public class Player : Node2D
 {
     [Signal]
     public delegate void EndTurn();
-    
+
     [Signal]
     public delegate void NewTurnSignal(string name);
 
@@ -29,18 +29,25 @@ public class Player : Node2D
         {
             GetParent().GetNode<Player>("Player1").NewTurn();
         }
+
         EmitSignal("EndTurn");
     }
 
     private void NewTurn()
     {
         GD.Print("My turn!");
-        EmitSignal("NewTurnSignal", GetPlayerNameWrapper().GetPlayerName());
+        EmitSignal("NewTurnSignal", GetPlayerName());
         GetTree().Paused = false;
     }
 
-    public PlayerNameWrapper GetPlayerNameWrapper()
+    private PlayerNameWrapper GetPlayerNameWrapper()
     {
         return GetNode<PlayerNameWrapper>("/root/" + this.Name + "NameWrapper");
     }
+
+    public string GetPlayerName()
+    {
+        return GetPlayerNameWrapper().GetPlayerName();
+    }
+
 }

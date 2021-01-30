@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://scenes/tile/TilesCollection.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/Player/Player.cs" type="Script" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://textures/ui/BoardBackground.png" type="Texture" id=5]
 [ext_resource path="res://scenes/ui/pause/PausePopup.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scenes/ui/YourTurnPopup.tscn" type="PackedScene" id=7]
+[ext_resource path="res://scenes/ui/EndGamePopup.tscn" type="PackedScene" id=8]
 
 [node name="Node2D" type="Node2D"]
 position = Vector2( 904.513, 550.478 )
@@ -63,17 +64,27 @@ margin_right = 392.513
 margin_bottom = 250.478
 
 [node name="YourTurnPopup" parent="PauseLayer" instance=ExtResource( 7 )]
+visible = false
 margin_left = 904.513
 margin_top = 550.478
 margin_right = 904.513
 margin_bottom = 550.478
+
+[node name="EndGamePopup" parent="PauseLayer" instance=ExtResource( 8 )]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
 [connection signal="EndTurn" from="Player2" to="3D2 Dice" method="NewTurn"]
 [connection signal="NewTurnSignal" from="Player2" to="PauseLayer/YourTurnPopup" method="PopupWithName"]
 [connection signal="EndThisTurn" from="Player2/Squad" to="Player2" method="EndThisTurn"]
 [connection signal="ReRoll" from="Player2/Squad" to="3D2 Dice" method="ReRoll"]
+[connection signal="Win" from="Player2/Squad" to="PauseLayer/EndGamePopup" method="Win"]
 [connection signal="EndTurn" from="Player1" to="3D2 Dice" method="NewTurn"]
 [connection signal="NewTurnSignal" from="Player1" to="PauseLayer/YourTurnPopup" method="PopupWithName"]
 [connection signal="EndThisTurn" from="Player1/Squad" to="Player1" method="EndThisTurn"]
 [connection signal="ReRoll" from="Player1/Squad" to="3D2 Dice" method="ReRoll"]
+[connection signal="Win" from="Player1/Squad" to="PauseLayer/EndGamePopup" method="Win"]
 [connection signal="BlackRoll" from="3D2 Dice" to="Player1/Squad" method="_On_Dice_Roll"]
 [connection signal="WhiteRoll" from="3D2 Dice" to="Player2/Squad" method="_On_Dice_Roll"]

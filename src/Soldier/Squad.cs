@@ -12,6 +12,9 @@ namespace royalgameofur
         [Signal]
         public delegate void EndThisTurn();
         
+        [Signal]
+        public delegate void Win(string name);
+        
         private SquadPath Path = new SquadPath();
         
         [Export()]
@@ -20,10 +23,13 @@ namespace royalgameofur
         [Export()]
         public int Steps { get; private set; }
 
+        public int Tracker { get; set; }
+
         public override void _Ready()
         {
             Path.SetPath(this);
             InitSkipButton();
+            Tracker = 7;
         }
 
         private void InitSkipButton()
@@ -87,6 +93,14 @@ namespace royalgameofur
         {
             DeselectEverything();
             EmitSignal("ReRoll");
+        }
+
+        public override void _PhysicsProcess(float delta)
+        {
+            if (Tracker <= 0)
+            {
+                EmitSignal("Win", GetParent<Player>().GetPlayerName());
+            }
         }
     }
 }
