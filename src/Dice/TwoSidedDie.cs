@@ -18,10 +18,15 @@ namespace royalgameofur
         private readonly Texture WhiteSideIcon = GD.Load<Texture>("res://textures/dice/WhiteSide.png");
         private readonly Texture BlackSideIcon = GD.Load<Texture>("res://textures/dice/BlackSide.png");
         private int NumberOfRolls = 0;
+        private static float _step = (float)1;
+        public static Animation Cast { get; set; }
+
 
         public override void _Ready()
         {
             Side = DiceSide.Down;
+            Cast = GetNode<AnimationPlayer>("AnimationPlayer").GetAnimation("Cast");
+            
             Connect("Rolled", GetParent(), "RollStopped");
             SetIcon();
         }
@@ -41,11 +46,16 @@ namespace royalgameofur
                 default:
                     throw new ArgumentOutOfRangeException();
             }
+            // Cast.TrackInsertKey(0, NumberOfRolls * _step, GetNode<Sprite>("Icon").Texture);
+            // Cast.TrackInsertKey(1, NumberOfRolls * _step, GetNode<Sprite>("Icon").Scale);
         }
 
         public DiceSide Roll()
         {
             NumberOfRolls = NormalDistributionGenerateInteger(MeanNumberOfRolls, StdDevNumberOfRolls);
+            Cast.Length = (float)NumberOfRolls / 5;
+            // Cast.ValueTrackSetUpdateMode(0, Animation.UpdateMode.Discrete);
+            // Cast.ValueTrackSetUpdateMode(1, Animation.UpdateMode.Discrete);
             return Side;
         }
 
@@ -67,17 +77,36 @@ namespace royalgameofur
             return randomSample > 0 ? randomSample : 1;
         }
 
-        public override void _Process(float delta)
+        public void AnimationStopped(string name)
         {
-            while (NumberOfRolls != 0)
+            // if (GetNode<AnimationPlayer>("AnimationPlayer").GetAnimation(name).Length > 0.06)
+            // {
+            //     Cast.Length = (float) 0.05;
+            //     Cast.TrackInsertKey(0, (float) 0.02, GetNode<Sprite>("Icon").Texture);
+            //     Cast.TrackInsertKey(1, (float) 0.02, GetNode<Sprite>("Icon").Scale);
+            //     Cast.Loop = true;
+            //     GetNode<AnimationPlayer>("AnimationPlayer").Play("Cast");
+            // }
+        }
+
+        public override void _PhysicsProcess(float delta)
+        {
+            if (NumberOfRolls != 0)
             {
-                MayBeFlip();
-                deltaSteps = 0; 
-                NumberOfRolls--; 
-                
+                if (deltaSteps == 0)
+                {
+                    MayBeFlip();
+                    deltaSteps = 5;
+                    NumberOfRolls--;
+                }
+
+                deltaSteps--;
+
                 if (NumberOfRolls == 0)
                 {
                     EmitSignal("Rolled", this);
+                    //Cast.Loop = false;
+                    //GetNode<AnimationPlayer>("AnimationPlayer").PlayBackwards("Cast");
                 }
             }
         }
