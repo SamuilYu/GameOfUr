@@ -51,7 +51,7 @@ namespace royalgameofur
                 // calculate march for every soldier and show skip button if appropriate
                 List<KeyValuePair<Tile, SoldierTenure>> nextTiles = Path.GetNext(soldier.CurrentTile, soldier.Tenure, steps);
                 soldier.March = nextTiles;
-                if (nextTiles != null && nextTiles[nextTiles.Count - 1].Key.CheckPlaceForSoldier(soldier, false))
+                if (nextTiles != null && nextTiles[nextTiles.Count - 1].Key.CheckPlaceForSoldier(soldier, false) && !soldier.blocked)
                     shouldSkip = false;
             }
             GetNode<SquadBase>("SquadBase").Wake();
