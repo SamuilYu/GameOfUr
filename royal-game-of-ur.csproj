@@ -4,9 +4,6 @@
     <RootNamespace>royalgameofur</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <Folder Include="scenes\tile" />
-  </ItemGroup>
-  <ItemGroup>
     <PackageReference Include="GodotCSTools" Version="1.0.0-beta9" />
   </ItemGroup>
   <ItemGroup>
@@ -26,6 +23,11 @@
     <Content Include="scenes\squad\Soldier.tscn" />
     <Content Include="scenes\squad\Squad.tscn" />
     <Content Include="scenes\squad\SquadBase.tscn" />
+    <Content Include="scenes\tile\Tile.tscn" />
+    <Content Include="scenes\tile\TileDetails.tscn" />
+    <Content Include="scenes\tile\TilePopupMenu.tscn" />
+    <Content Include="scenes\tile\TilesCollection.tscn" />
+    <Content Include="scenes\ui\EndGamePopup.tscn" />
     <Content Include="scenes\ui\main-menu\CustomMenuList.tscn" />
     <Content Include="scenes\ui\main-menu\MainMenu.tscn" />
     <Content Include="scenes\ui\main-menu\NewGamePopup.tscn" />
