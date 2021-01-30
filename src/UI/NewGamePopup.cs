@@ -11,22 +11,31 @@ public class NewGamePopup : Control
     }
 
     private readonly List<bool> emptyNamesFlags = new List<bool>();
+    private List<string> playerNames = new List<string>();
 
     private NewGamePopup()
     {
         emptyNamesFlags.Add(false);
         emptyNamesFlags.Add(false);
+        
+        playerNames.Add("");
+        playerNames.Add("");
     }
 
-    public void EmptyName(int number)
+    public void EmptyName(int number, string name)
     {
         GetNode("Popup").GetNode<Button>("StartGame").Disabled = true;
         emptyNamesFlags[number - 1] = false;
     }
     
-    public void NonEmptyName(int number)
+    public void NonEmptyName(int number, string name)
     {
+        playerNames[number - 1] = name;
         emptyNamesFlags[number - 1] = true;
+        if (playerNames[0] == playerNames[1])
+        {
+            GetNode("Popup").GetNode<Button>("StartGame").Disabled = true;
+        }
     }
 
     private void NewGame()
@@ -50,7 +59,7 @@ public class NewGamePopup : Control
 
     public override void _PhysicsProcess(float delta)
     {
-        if (emptyNamesFlags[0] && emptyNamesFlags[1])
+        if (emptyNamesFlags[0] && emptyNamesFlags[1] && playerNames[0] != playerNames[1])
         {
             GetNode("Popup").GetNode<Button>("StartGame").Disabled = false;
         }
