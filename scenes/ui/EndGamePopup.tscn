@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://fonts/CommanderPromptFont.tres" type="DynamicFont" id=1]
 [ext_resource path="res://textures/ui/PanelTexture.png" type="Texture" id=2]
+[ext_resource path="res://src/UI/EndGamePopup.cs" type="Script" id=3]
 
 [sub_resource type="StyleBoxTexture" id=1]
 texture = ExtResource( 2 )
@@ -10,6 +11,7 @@ region_rect = Rect2( 0, 0, 629, 595 )
 [node name="EndGamePopup" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+script = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -40,7 +42,7 @@ margin_right = 140.0
 margin_bottom = 100.0
 custom_styles/panel = SubResource( 1 )
 
-[node name="Replay" type="Button" parent="Popup"]
+[node name="Rematch" type="Button" parent="Popup"]
 anchor_left = 0.15
 anchor_top = 0.7
 anchor_right = 0.45
@@ -54,7 +56,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Button2" type="Button" parent="Popup"]
+[node name="MainMenu" type="Button" parent="Popup"]
 anchor_left = 0.52
 anchor_top = 0.7
 anchor_right = 0.85
@@ -77,3 +79,9 @@ margin_left = -99.0
 margin_top = -70.0
 margin_right = 102.0
 margin_bottom = 24.0
+bbcode_enabled = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="pressed" from="Popup/Rematch" to="." method="Rematch"]
+[connection signal="pressed" from="Popup/MainMenu" to="." method="MainMenu"]
