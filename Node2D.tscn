@@ -30,18 +30,18 @@ zoom = Vector2( 1.8, 1.8 )
 position = Vector2( -672.344, -427.975 )
 scale = Vector2( 1.45, 1.4 )
 
-[node name="Player1" type="Node2D" parent="."]
-script = ExtResource( 2 )
-
-[node name="Squad" parent="Player1" instance=ExtResource( 3 )]
-position = Vector2( 645.346, -412.708 )
-scale = Vector2( 1.5, 1.5 )
-Steps = 4
-
 [node name="Player2" type="Node2D" parent="."]
 script = ExtResource( 2 )
 
 [node name="Squad" parent="Player2" instance=ExtResource( 3 )]
+position = Vector2( 645.346, -412.708 )
+scale = Vector2( 1.5, 1.5 )
+Steps = 4
+
+[node name="Player1" type="Node2D" parent="."]
+script = ExtResource( 2 )
+
+[node name="Squad" parent="Player1" instance=ExtResource( 3 )]
 position = Vector2( 648.777, 421.767 )
 scale = Vector2( 1.5, 1.5 )
 Team = 2
@@ -67,13 +67,13 @@ margin_left = 904.513
 margin_top = 550.478
 margin_right = 904.513
 margin_bottom = 550.478
+[connection signal="EndTurn" from="Player2" to="3D2 Dice" method="NewTurn"]
+[connection signal="NewTurnSignal" from="Player2" to="PauseLayer/YourTurnPopup" method="PopupWithName"]
+[connection signal="EndThisTurn" from="Player2/Squad" to="Player2" method="EndThisTurn"]
+[connection signal="ReRoll" from="Player2/Squad" to="3D2 Dice" method="ReRoll"]
 [connection signal="EndTurn" from="Player1" to="3D2 Dice" method="NewTurn"]
 [connection signal="NewTurnSignal" from="Player1" to="PauseLayer/YourTurnPopup" method="PopupWithName"]
 [connection signal="EndThisTurn" from="Player1/Squad" to="Player1" method="EndThisTurn"]
 [connection signal="ReRoll" from="Player1/Squad" to="3D2 Dice" method="ReRoll"]
-[connection signal="EndTurn" from="Player2" to="3D2 Dice" method="NewTurn"]
-[connection signal="NewTurnSignal" from="Player2" to="PauseLayer/YourTurnPopup" method="PopupWithName"]
-[connection signal="EndThisTurn" from="Player2/Squad" to="Player1" method="EndThisTurn"]
-[connection signal="ReRoll" from="Player2/Squad" to="3D2 Dice" method="ReRoll"]
-[connection signal="BlackRoll" from="3D2 Dice" to="Player2/Squad" method="_On_Dice_Roll"]
-[connection signal="WhiteRoll" from="3D2 Dice" to="Player1/Squad" method="_On_Dice_Roll"]
+[connection signal="BlackRoll" from="3D2 Dice" to="Player1/Squad" method="_On_Dice_Roll"]
+[connection signal="WhiteRoll" from="3D2 Dice" to="Player2/Squad" method="_On_Dice_Roll"]

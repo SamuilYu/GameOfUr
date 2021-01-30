@@ -13,7 +13,7 @@ public class Player : Node2D
 
     public override void _Ready()
     {
-        if (Name == "Player2")
+        if (Name == "Player1")
         {
             NewTurn();
         }
