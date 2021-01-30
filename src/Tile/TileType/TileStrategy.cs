@@ -52,7 +52,7 @@ namespace royalgameofur
 			soldier.CurrentTile = GetParent<Tile>();
 			soldier.ZIndex = FilledCapacity;
 			soldier.PreviousZIndex = soldier.ZIndex;
-			// DrawTower();
+			DrawTower();
 		}
 
 		protected void MayBeAttack(Soldier soldier)
@@ -70,7 +70,7 @@ namespace royalgameofur
 			if (!stationedSoldiers.Exists(each => each == soldier)) return;
 			FilledCapacity--;
 			stationedSoldiers.Remove(soldier);
-			// DrawTower();
+			DrawTower();
 		}
 
 		public bool HasSoldiers(PlayerTeam currentTurn)
@@ -86,47 +86,41 @@ namespace royalgameofur
 			return null;
 		}
 
-		// protected virtual void DrawTower()
-		// {
-		// 	var places = GetParent<Tile>().TileDetails
-		// 		.GetNode("DetailsContainer")
-		// 		.GetNode("Places").GetChildren();
-		// 	if (FilledCapacity == 1)
-		// 	{
-		// 		if (places[0] is Button button0) button0.Icon = null;
-		// 		if (places[1] is Button button1) button1.Icon = null;
-		// 		if (places[2] is Button button2) button2.Icon = stationedSoldiers[0].Button.Icon;
-		// 		if (places[3] is Button button3) button3.Icon = null;
-		// 	} 
-		// 	else if (FilledCapacity == 2)
-		// 	{
-		// 		if (places[0] is Button button0) button0.Icon = null;
-		// 		if (places[1] is Button button1) button1.Icon = stationedSoldiers[0].Button.Icon;
-		// 		if (places[2] is Button button2) button2.Icon = stationedSoldiers[1].Button.Icon;
-		// 		if (places[3] is Button button3) button3.Icon = null;
-		//
-		// 	}
-		// 	else if (FilledCapacity == 3)
-		// 	{
-		// 		if (places[0] is Button button0) button0.Icon = null;
-		// 		if (places[1] is Button button1) button1.Icon = stationedSoldiers[0].Button.Icon;
-		// 		if (places[2] is Button button2) button2.Icon = stationedSoldiers[1].Button.Icon;
-		// 		if (places[3] is Button button3) button3.Icon = stationedSoldiers[2].Button.Icon;
-		// 	}
-		// 	else if (FilledCapacity == 4)
-		// 	{
-		// 		if (places[0] is Button button0) button0.Icon = stationedSoldiers[0].Button.Icon;
-		// 		if (places[1] is Button button1) button1.Icon = stationedSoldiers[1].Button.Icon;
-		// 		if (places[2] is Button button2) button2.Icon = stationedSoldiers[2].Button.Icon;
-		// 		if (places[3] is Button button3) button3.Icon = stationedSoldiers[3].Button.Icon;
-		// 	}
-		// 	else if (FilledCapacity == 0)
-		// 	{
-		// 		if (places[0] is Button button0) button0.Icon = null;
-		// 		if (places[1] is Button button1) button1.Icon = null;
-		// 		if (places[2] is Button button2) button2.Icon = null;
-		// 		if (places[3] is Button button3) button3.Icon = null;
-		// 	}
-		// }
+		private void DrawTower()
+		{
+			var places = GetParent<Tile>().GetNode<Node2D>("TowerView").GetNode("Background").GetChildren();
+			(places[0] as Polygon2D)?.Hide();
+			(places[1] as Polygon2D)?.Hide();
+			(places[2] as Polygon2D)?.Hide();
+			(places[3] as Polygon2D)?.Hide();
+			for (int i = 0; i < 4; i++)
+			{
+				if (FilledCapacity > i)
+				{
+					if (places[i] is Polygon2D place)
+					{
+						if (stationedSoldiers[i].Team == PlayerTeam.White)
+						{
+							place.Color = new Color((float)0.87, (float)0.82, (float)0.62);
+						}
+						else
+						{
+							place.Color = new Color((float)0.32, (float)0.24, (float)0.05);
+						}
+
+						if (stationedSoldiers[i].Tenure == SoldierTenure.Veteran)
+						{
+							place.GetNode<Polygon2D>("Diamond").Show();
+						}
+						else
+						{
+							place.GetNode<Polygon2D>("Diamond").Hide();
+						}
+						place.Show();
+					}
+				
+				} 
+			}
+		}
 	}
 }

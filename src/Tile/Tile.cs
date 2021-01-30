@@ -21,6 +21,7 @@ namespace royalgameofur
         private Light lightColor;
         
         private bool canSelect;
+        private int deltaSteps = 15;
 
         public override void _Ready()
         {
@@ -113,6 +114,24 @@ namespace royalgameofur
 
         public override void _Process(float delta)
         {
+            if (GetNode<TileArea>("TileArea").mouseOver 
+                && (strategy is CampTile || strategy is CityTile))
+            {
+                if (deltaSteps == 0)
+                {
+                    GetNode<Node2D>("TowerView").Show();
+                }
+                else
+                {
+                    deltaSteps--;
+                }
+            }
+            else
+            {
+                GetNode<Node2D>("TowerView").Hide();
+                deltaSteps = 15;
+            }
+            
             if (!waitingForSoldier || !reached) return;
             waitingForSoldier = false;
             reached = false;

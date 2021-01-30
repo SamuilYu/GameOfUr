@@ -5,7 +5,7 @@ using royalgameofur;
 public class TileArea : Area2D
 {
 
-    private bool mouseOver = false;
+    public bool mouseOver = false;
 
     public override void _Input(InputEvent @event)
     {

@@ -1,0 +1,53 @@
+[gd_scene format=2]
+
+[node name="TowerView" type="Node2D"]
+
+[node name="Background" type="Polygon2D" parent="."]
+position = Vector2( 0.0878656, -0.199725 )
+scale = Vector2( 12.1011, 13.1147 )
+z_index = 20
+color = Color( 0.486275, 0.356863, 0.203922, 1 )
+polygon = PoolVector2Array( 0.006006, 0.0298891, -0.00791502, 6.97612, 4.75457, 6.96962, 4.70029, 0.0164862 )
+
+[node name="Soldier1" type="Polygon2D" parent="Background"]
+visible = false
+color = Color( 0.870588, 0.819608, 0.619608, 1 )
+polygon = PoolVector2Array( 0.347759, 5.41651, 0.34375, 6.5625, 4.39147, 6.5625, 4.39147, 5.41406 )
+
+[node name="Diamond" type="Polygon2D" parent="Background/Soldier1"]
+position = Vector2( 0.0925277, 0 )
+color = Color( 0.176471, 0.0470588, 0.364706, 1 )
+polygon = PoolVector2Array( 2.28857, 5.57031, 1.97734, 5.96875, 2.30539, 6.36719, 2.59979, 5.95312 )
+
+[node name="Soldier2" type="Polygon2D" parent="Background"]
+visible = false
+position = Vector2( 0, -1.57812 )
+color = Color( 0.34902, 0.235294, 0.0470588, 1 )
+polygon = PoolVector2Array( 0.347759, 5.41651, 0.34375, 6.5625, 4.39147, 6.5625, 4.39147, 5.41406 )
+
+[node name="Diamond" type="Polygon2D" parent="Background/Soldier2"]
+position = Vector2( 0.0925277, 0 )
+color = Color( 0.176471, 0.0470588, 0.364706, 1 )
+polygon = PoolVector2Array( 2.28857, 5.57031, 1.97734, 5.96875, 2.30539, 6.36719, 2.59979, 5.95312 )
+
+[node name="Soldier3" type="Polygon2D" parent="Background"]
+visible = false
+position = Vector2( 0, -3.21328 )
+color = Color( 0.870588, 0.819608, 0.619608, 1 )
+polygon = PoolVector2Array( 0.347759, 5.41651, 0.34375, 6.5625, 4.39147, 6.5625, 4.39147, 5.41406 )
+
+[node name="Diamond" type="Polygon2D" parent="Background/Soldier3"]
+position = Vector2( 0.0925277, 0 )
+color = Color( 0.176471, 0.0470588, 0.364706, 1 )
+polygon = PoolVector2Array( 2.28857, 5.57031, 1.97734, 5.96875, 2.30539, 6.36719, 2.59979, 5.95312 )
+
+[node name="Soldier4" type="Polygon2D" parent="Background"]
+visible = false
+position = Vector2( 0, -4.82057 )
+color = Color( 0.870588, 0.819608, 0.619608, 1 )
+polygon = PoolVector2Array( 0.347759, 5.41651, 0.34375, 6.5625, 4.39147, 6.5625, 4.39147, 5.41406 )
+
+[node name="Diamond" type="Polygon2D" parent="Background/Soldier4"]
+position = Vector2( 0.0925277, 0 )
+color = Color( 0.176471, 0.0470588, 0.364706, 1 )
+polygon = PoolVector2Array( 2.28857, 5.57031, 1.97734, 5.96875, 2.30539, 6.36719, 2.59979, 5.95312 )
