@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://scenes/tile/TilesCollection.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/Player/Player.cs" type="Script" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://scenes/ui/pause/PausePopup.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scenes/ui/YourTurnPopup.tscn" type="PackedScene" id=7]
 [ext_resource path="res://scenes/ui/EndGamePopup.tscn" type="PackedScene" id=8]
+[ext_resource path="res://scenes/ui/Tracker.tscn" type="PackedScene" id=9]
 
 [node name="Node2D" type="Node2D"]
 position = Vector2( 904.513, 550.478 )
@@ -35,9 +36,12 @@ scale = Vector2( 1.45, 1.4 )
 script = ExtResource( 2 )
 
 [node name="Squad" parent="Player2" instance=ExtResource( 3 )]
-position = Vector2( 645.346, -412.708 )
+position = Vector2( 621.346, -412.708 )
 scale = Vector2( 1.5, 1.5 )
 Steps = 4
+
+[node name="Tracker" parent="Player2/Squad" instance=ExtResource( 9 )]
+position = Vector2( -829.292, -107.312 )
 
 [node name="Player1" type="Node2D" parent="."]
 script = ExtResource( 2 )
@@ -47,6 +51,9 @@ position = Vector2( 648.777, 421.767 )
 scale = Vector2( 1.5, 1.5 )
 Team = 2
 Steps = 3
+
+[node name="Tracker" parent="Player1/Squad" instance=ExtResource( 9 )]
+position = Vector2( -843.139, -112.12 )
 
 [node name="3D2 Dice" parent="." instance=ExtResource( 4 )]
 position = Vector2( 852.738, -29.7896 )

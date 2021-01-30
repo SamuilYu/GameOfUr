@@ -23,13 +23,13 @@ namespace royalgameofur
         [Export()]
         public int Steps { get; private set; }
 
-        public int Tracker { get; set; }
+        public Tracker Tracker { get; set; }
 
         public override void _Ready()
         {
             Path.SetPath(this);
             InitSkipButton();
-            Tracker = 7;
+            Tracker = GetNode<Tracker>("Tracker");
         }
 
         private void InitSkipButton()
@@ -97,7 +97,7 @@ namespace royalgameofur
 
         public override void _PhysicsProcess(float delta)
         {
-            if (Tracker <= 0)
+            if (Tracker.releasedSoldiersCount >= 7)
             {
                 EmitSignal("Win", GetParent<Player>().GetPlayerName());
             }
