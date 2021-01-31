@@ -1,9 +1,12 @@
+using Godot;
+
 namespace royalgameofur
 {
     public class ReleaseTile : TileStrategy
     {
         public override void _Ready()
         {
+            Texture = GD.Load("res://textures/tiles/ReleaseTile.png") as Texture;
             FilledCapacity = 0;
             MaxCapacity = 1;
             Description =

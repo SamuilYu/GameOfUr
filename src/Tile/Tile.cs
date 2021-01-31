@@ -33,6 +33,7 @@ namespace royalgameofur
                 GetNode<Sprite>("Icon").Scale =
                     new Vector2((float)100 / strategy.Texture.GetWidth(), 
                                 (float)100 / strategy.Texture.GetHeight());
+                if (strategy is ReleaseTile) GetNode<Sprite>("Icon").Modulate = new Color(0, 0, 0, 0);
             }
 
             // setting up lights
@@ -93,10 +94,20 @@ namespace royalgameofur
             if (toggle)
             {
                 lightColor = check ? Light.Green : Light.Red;
-                GetNode<Sprite>("Icon").Modulate =
-                    check? 
-                        new Color((float) 0.44, (float) 0.70, (float) 0.13) 
-                        : new Color((float) 0.93, (float) 0.29, (float) 0.04);
+                if (strategy is ReleaseTile)
+                {
+                    GetNode<Sprite>("Icon").Modulate =
+                        check? 
+                            new Color((float) 0.32, (float) 0.70, (float) 0.55, (float) 0.35) 
+                            : new Color((float) 0.93, (float) 0.29, (float) 0.04, (float) 0.35);
+                }
+                else
+                {
+                    GetNode<Sprite>("Icon").Modulate =
+                        check? 
+                            new Color((float) 0.44, (float) 0.70, (float) 0.13) 
+                            : new Color((float) 0.93, (float) 0.29, (float) 0.04);
+                }
 
                 canSelect = check;
                 potentialSoldier = check ? soldier : null;
@@ -109,6 +120,7 @@ namespace royalgameofur
             potentialSoldier = null;
             canSelect = false;
             GetNode<Sprite>("Icon").Modulate = new Color(1,1,1,1);
+            if (strategy is ReleaseTile) GetNode<Sprite>("Icon").Modulate = new Color(0, 0, 0, 0);
             lightColor = Light.None;
         }
 
