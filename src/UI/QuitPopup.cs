@@ -21,7 +21,14 @@ namespace royalgameofur
 
         private void YesQuit()
         {
-            GetTree().Quit();
+            if (Name == "MainMenuPopup")
+            {
+                GetTree().ChangeScene("res://scenes/ui/main-menu/MainMenu.tscn");
+            }
+            else if (Name == "QuitPopup")
+            {
+                GetTree().Quit();
+            }
         }
 
         

@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://scenes/ui/pause/CustomPauseList.tscn" type="PackedScene" id=1]
 [ext_resource path="res://textures/ui/panel_texture.tres" type="StyleBox" id=2]
 [ext_resource path="res://scenes/ui/QuitPopup.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/UI/PauseMenuPopup.cs" type="Script" id=4]
+[ext_resource path="res://scenes/ui/MainMenuPopup.tscn" type="PackedScene" id=5]
 
 [node name="PauseMenuPopup" type="Control"]
 pause_mode = 2
@@ -61,5 +62,9 @@ layer = 12
 
 [node name="QuitPopup" parent="PopupsLayer" instance=ExtResource( 3 )]
 visible = false
+
+[node name="MainMenuPopup" parent="PopupsLayer" instance=ExtResource( 5 )]
+visible = false
 [connection signal="Continue" from="Popup/CustomPauseList" to="." method="Continue"]
 [connection signal="Quit" from="Popup/CustomPauseList" to="PopupsLayer/QuitPopup" method="Quit"]
+[connection signal="ToMainMenu" from="Popup/CustomPauseList" to="PopupsLayer/MainMenuPopup" method="Quit"]
