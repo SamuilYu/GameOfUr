@@ -43,6 +43,16 @@ Steps = 4
 [node name="Tracker" parent="Player2/Squad" instance=ExtResource( 9 )]
 position = Vector2( -829.292, -107.312 )
 
+[node name="SkipButton" type="Button" parent="Player2/Squad"]
+margin_left = 79.2134
+margin_top = -15.0514
+margin_right = 211.213
+margin_bottom = 22.9486
+text = "Skip Turn"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Player1" type="Node2D" parent="."]
 script = ExtResource( 2 )
 
@@ -55,8 +65,18 @@ Steps = 3
 [node name="Tracker" parent="Player1/Squad" instance=ExtResource( 9 )]
 position = Vector2( -843.139, -112.12 )
 
+[node name="SkipButton" type="Button" parent="Player1/Squad"]
+margin_left = 70.8054
+margin_top = -16.8809
+margin_right = 202.805
+margin_bottom = 21.1191
+text = "Skip Turn"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="3D2 Dice" parent="." instance=ExtResource( 4 )]
-position = Vector2( 852.738, -29.7896 )
+position = Vector2( 851.056, -16.3352 )
 rotation = 1.5708
 scale = Vector2( 2, 1.5 )
 
@@ -89,10 +109,12 @@ anchor_bottom = 0.5
 [connection signal="EndThisTurn" from="Player2/Squad" to="Player2" method="EndThisTurn"]
 [connection signal="ReRoll" from="Player2/Squad" to="3D2 Dice" method="ReRoll"]
 [connection signal="Win" from="Player2/Squad" to="PauseLayer/EndGamePopup" method="Win"]
+[connection signal="pressed" from="Player2/Squad/SkipButton" to="Player2/Squad" method="EndTurn"]
 [connection signal="EndTurn" from="Player1" to="3D2 Dice" method="NewTurn"]
 [connection signal="NewTurnSignal" from="Player1" to="PauseLayer/YourTurnPopup" method="PopupWithName"]
 [connection signal="EndThisTurn" from="Player1/Squad" to="Player1" method="EndThisTurn"]
 [connection signal="ReRoll" from="Player1/Squad" to="3D2 Dice" method="ReRoll"]
 [connection signal="Win" from="Player1/Squad" to="PauseLayer/EndGamePopup" method="Win"]
+[connection signal="pressed" from="Player1/Squad/SkipButton" to="Player1/Squad" method="EndTurn"]
 [connection signal="BlackRoll" from="3D2 Dice" to="Player1/Squad" method="_On_Dice_Roll"]
 [connection signal="WhiteRoll" from="3D2 Dice" to="Player2/Squad" method="_On_Dice_Roll"]

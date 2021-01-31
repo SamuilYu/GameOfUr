@@ -35,7 +35,7 @@ namespace royalgameofur
         private void InitSkipButton()
         {
             var diceSkipButton = GetParent().GetParent().GetNode<Dice>("3D2 Dice").GetNode<Button>("SkipButton");
-            GetNode<Button>("SkipButton").SetGlobalPosition(diceSkipButton.GetGlobalRect().Position);
+            GetNode<Button>("SkipButton").SetGlobalPosition(GetNode<Position2D>("SkipButtonPosition").GlobalPosition);
             GetNode<Button>("SkipButton").Hide();
         }
 

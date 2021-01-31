@@ -1,14 +1,16 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://src/Soldier/Squad.cs" type="Script" id=1]
 [ext_resource path="res://scenes/squad/SquadBase.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/squad/Soldier.tscn" type="PackedScene" id=3]
-[ext_resource path="res://fonts/MainFont.tres" type="DynamicFont" id=4]
 
 [node name="Squad" type="Node2D"]
 script = ExtResource( 1 )
 Team = 1
 Steps = 1
+
+[node name="SkipButtonPosition" type="Position2D" parent="."]
+position = Vector2( 61.6387, -5.58291 )
 
 [node name="SquadBase" parent="." instance=ExtResource( 2 )]
 
@@ -32,15 +34,3 @@ position = Vector2( 2.82843, 1.41391 )
 
 [node name="Soldier7" parent="." instance=ExtResource( 3 )]
 position = Vector2( 0, 2.82814 )
-
-[node name="SkipButton" type="Button" parent="."]
-margin_left = 61.0
-margin_top = -19.0
-margin_right = 194.0
-margin_bottom = 20.0
-custom_fonts/font = ExtResource( 4 )
-text = "Skip Turn"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-[connection signal="pressed" from="SkipButton" to="." method="EndTurn"]

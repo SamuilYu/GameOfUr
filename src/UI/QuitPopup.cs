@@ -28,6 +28,10 @@ namespace royalgameofur
             else if (Name == "QuitPopup")
             {
                 GetTree().Quit();
+            } 
+            else if (Name == "ReplayPopup")
+            {
+                GetTree().ChangeScene("res://Node2D.tscn");
             }
         }
 
