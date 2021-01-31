@@ -3,15 +3,10 @@ using System;
 
 public class EndGamePopup : Control
 {
-    public override void _Ready()
-    {
-        
-    }
-
     public void Win(string name)
     {
         GetNode<PopupDialog>("Popup")
-            .GetNode<RichTextLabel>("RichTextLabel").Text = 
+            .GetNode<Label>("Label").Text = 
             name + ", you have won!";
         
         GetTree().Paused = true;

@@ -21,7 +21,7 @@ namespace royalgameofur
         private Light lightColor;
         
         private bool canSelect;
-        private int deltaSteps = 50;
+        private int deltaSteps = 100;
 
         public override void _Ready()
         {
@@ -141,7 +141,7 @@ namespace royalgameofur
             else
             {
                 GetNode<Node2D>("TowerView").Hide();
-                deltaSteps = 50;
+                deltaSteps = 100;
             }
             
             if (!waitingForSoldier || !reached) return;
